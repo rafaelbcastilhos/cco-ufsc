@@ -39,7 +39,7 @@ begin
     S1: soma8 port map(kg, kg, sum1);
     
     -- divide por 4
-    D: div4 port map(kg, div); -- 
+    D: div4 port map(kg, div);
     S2: soma8 port map(sum1, div, sum2);
 
     -- converte para bcd
