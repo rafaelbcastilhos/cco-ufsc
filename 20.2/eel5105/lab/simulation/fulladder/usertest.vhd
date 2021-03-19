@@ -19,8 +19,8 @@ begin
     DUT: fulladder port map (A1, A2, A3, Soma, FAout);
 
     process
-      constant period: time := 10 ns;
-      begin
+    constant period: time := 10 ns;
+    begin
         A1 <= '0'; A2 <= '0'; A3 <= '0';
         wait for period;
         assert ((Soma = '0') and (FAout = '0'))
@@ -61,5 +61,5 @@ begin
         assert ((Soma = '1') and (FAout = '1'))
         report "Failed for 111." severity error;
         wait;
-     end process;
+    end process;
 end tb;

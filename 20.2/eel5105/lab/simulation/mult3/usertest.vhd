@@ -24,8 +24,8 @@ begin
                         S => Saida);
 
     process
-      constant period: time := 10 ns;
-      begin
+    constant period: time := 10 ns;
+    begin
         A1 <= "0000";
         wait for period;
         assert Saida = "00000"
@@ -66,5 +66,5 @@ begin
         assert Saida = "10101"
         report "Failed for 0111." severity error;
         wait;
-     end process;
+    end process;
 end mult34bits;
