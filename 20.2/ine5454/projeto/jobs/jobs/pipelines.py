@@ -10,7 +10,7 @@ from itemadapter import ItemAdapter
 
 
 def clean_item(item):
-    spec_chars = ["¦", "ð", "Ÿ", "¥", "³", "\n", "\b", "<br>", "\r", "  "]
+    spec_chars = ["¦", "ð", "Ÿ", "¥", "³", "\n", "\b", "<br>", "\r", "  ", "•", "\t"]
     for char in spec_chars:
         if item['title'] is not None:
             item['title'] = item['title'].replace(char, '')
@@ -36,22 +36,21 @@ def clean_item(item):
 
         if item['salary'] is not None:
             item['salary'] = item['salary'].replace(char, '')
-        else:
-            item['salary'] = "A combinar"
 
     return item
 
 
 class JobsPipeline:
     def open_spider(self, spider):
-        self.file = open('out.jl', 'w', encoding='utf8')
+        # abre arquivo, se nao existir é criado, se existir é adicionado ao final
+        self.file = open("jobs.json", 'a+', encoding='utf8')
 
     def close_spider(self, spider):
         self.file.close()
 
     def process_item(self, item, spider):
+        # limpa o item, converte em dicionário e escreve no arquivo
         job_object = clean_item(item)
         line = json.dumps(
-            ItemAdapter(job_object).asdict(), ensure_ascii=False) + "\n"
+            ItemAdapter(job_object).asdict(), ensure_ascii=False) + ",\n"
         self.file.write(line)
-        return item

@@ -1,5 +1,6 @@
 import scrapy
 from ..items import JobsItem
+from ..regex import *
 
 
 class VagasSpider(scrapy.Spider):
@@ -7,7 +8,7 @@ class VagasSpider(scrapy.Spider):
     allowed_domains = []
 
     custom_settings = {
-        'CLOSESPIDER_ITEMCOUNT': 15
+        'CLOSESPIDER_ITEMCOUNT': 10
     }
 
     def start_requests(self):
@@ -57,22 +58,26 @@ class VagasSpider(scrapy.Spider):
             "//h2"
             "/text()").get()
 
-        item["salary"] = second_response.xpath(
-            "//div[@class='infoVaga']"
-            "//ul"
-            "//li"
-            "//div"
-            "//span[2]"
-            "/text()").get()
+        # item["salary"] = second_response.xpath(
+        #     "//div[@class='infoVaga']"
+        #     "//ul"
+        #     "//li"
+        #     "//div"
+        #     "//span[2]"
+        #     "/text()").get()
 
-        item["hierarchy"] = second_response.xpath(
-            "//div[@class='job-hierarchylist']"
-            "//span"
-            "/@aria-label").get()
+        # item["hierarchy"] = second_response.xpath(
+        #     "//div[@class='job-hierarchylist']"
+        #     "//span"
+        #     "/@aria-label").get()
 
         item["description"] = None
-        item["hiring_type"] = None
-        item["mode"] = None
+
+        html = get_html_from_response(second_response)
+        item["hiring_type"] = search_hiring_type(html)
+        item["hierarchy"] = search_hierarchy(html)
+        item["salary"] = search_salary(html)
+        item["mode"] = search_mode(html)
 
         self.logger.info(f"Job scraped")
         yield item

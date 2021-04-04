@@ -7,7 +7,7 @@ class CathoSpider(scrapy.Spider):
     start_urls = ['https://www.catho.com.br/vagas/cientista-de-dados/']
 
     custom_settings = {
-        'CLOSESPIDER_ITEMCOUNT': 200
+        'CLOSESPIDER_ITEMCOUNT': 10
     }
 
     def parse(self, response):
@@ -15,7 +15,7 @@ class CathoSpider(scrapy.Spider):
 
         total = response.xpath("//p[@class='sc-caSCKo ifvWxd']"
                                "/text()").get()
-
+        
         split = total.split(": ")
         total = int(split[1])
         total = int(total/20) + 1
@@ -35,12 +35,14 @@ class CathoSpider(scrapy.Spider):
         
         for job in jobs:
             item = JobsItem()
-            
-            item["title"] = job.css("::attr(data-gtm-dimension-38)").extract()
+
+            title = job.css("::attr(data-gtm-dimension-38)").extract()
+            item["title"] = str(title[0])
 
             item["company_name"] = None
 
-            item["salary"] = job.css("::attr(data-gtm-dimension-41)").extract()
+            salary = job.css("::attr(data-gtm-dimension-41)").extract()
+            item["salary"] = str(salary[0])
 
             item["hierarchy"] = None
             item["description"] = None
