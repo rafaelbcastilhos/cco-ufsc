@@ -39,11 +39,11 @@ class EstagiosUFSCSpider(scrapy.Spider):
         # percorre a página e extrai as informações necessárias
         item = JobsItem()
 
-        item["title"] = second_response.xpath(
-            "//div[@class='inner']"
-            "//h1"
-            "//strong"
-            "/text()").get()
+        # item["title"] = second_response.xpath(
+        #     "//div[@class='inner']"
+        #     "//h1"
+        #     "//strong"
+        #     "/text()").get()
 
         # item["hierarchy"] = second_response.xpath(
         #     "//div[@id='type_dates']"
@@ -83,10 +83,12 @@ class EstagiosUFSCSpider(scrapy.Spider):
         item["company_name"] = None
 
         html = get_html_from_response(second_response)
+        item["title"] = search_title(html)
         item["hiring_type"] = search_hiring_type(html)
         item["hierarchy"] = search_hierarchy(html)
         item["salary"] = search_salary(html)
         item["mode"] = search_mode(html)
+        item["url"] = second_response.url
 
         self.logger.info(f"Job scraped")
         yield item

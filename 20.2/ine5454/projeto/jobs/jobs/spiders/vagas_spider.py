@@ -78,6 +78,7 @@ class VagasSpider(scrapy.Spider):
         item["hierarchy"] = search_hierarchy(html)
         item["salary"] = search_salary(html)
         item["mode"] = search_mode(html)
+        item["url"] = second_response.url
 
         self.logger.info(f"Job scraped")
         yield item
