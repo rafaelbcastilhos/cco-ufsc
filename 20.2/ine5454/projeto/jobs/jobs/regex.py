@@ -5,8 +5,8 @@ def get_html_from_response(response):
     return ''.join(response.xpath("//body//text()").extract()).strip()
 
 
+# regex para capturar a hierarquia/experiência
 def search_hierarchy(html):
-    # regex para capturar a hierarquia/experiência
     if re.search(r'(?i)s[eêEÊ]nior', html):
         return "Sênior"
 
@@ -23,23 +23,23 @@ def search_hierarchy(html):
         return None
 
 
+# regex para capturar o tipo da contratação
 def search_hiring_type(html):
-    # regex para capturar o tipo da contratação
     if re.search(r'(?i)clt', html):
         return "CLT"
 
     elif re.search(r'(?i)pj', html):
         return "PJ"
 
-    elif re.search(r'(?i)freelancer', html):
+    elif re.search(r'(?i)freela[ncer]?', html):
         return "Freelancer"
 
     else:
         return None
 
 
+# regex para capturar o modo de trabalho
 def search_mode(html):
-    # regex para capturar o modo de trabalho
     if re.search(r'(?i)presencial', html) or re.search(r'(?i)on[-\s]?site', html):
         return "Presencial"
 
@@ -53,12 +53,34 @@ def search_mode(html):
         return None
 
 
+# regex para capturar o salário com diferentes moedas e pontuação
 def search_salary(html):
-    # regex para capturar o salário com diferentes moedas e pontuação
     salary = re.search(r'(?i)(R\$|€|£|USD|US\$)\s?(\d{1,4}(\.\d{3})?)(,\d{2})?(\.\d{2})?([kK])?', html)
     if salary:
         print(f"log salario {salary.group()}")
         return salary.group()
 
     else:
-        return "A combinar"
+        return None
+
+
+# regex para capturar o título da vaga quando inicia com "Vaga 'de || em'"
+def search_title(html):
+    title = re.search(r'(?i)[\n\r][ \t]*(vaga (de|em)?)[ \t]*([^\n\r]*)', html)
+    if title:
+        print(f"log title {title.group()}")
+        return title.group()
+
+    else:
+        return None
+
+
+# regex para capturar a descrição da vaga quando possui a palavra chave "descrição || description"
+def search_description(html):
+    description = re.search(r'(?i)[\n\r][ \t]*((job)?descri[cCçÇpP][aAãÃtT][iI]?o[nN]?)[ \t]*([^\n\r]*)[\r\n]+([^\r\n]+)', html)
+    if description:
+        print(f"log description {description.group()}")
+        return description.group()
+
+    else:
+        return None

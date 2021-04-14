@@ -14,3 +14,4 @@ class JobsItem(Item):
     hiring_type = Field()
     mode = Field()
     salary = Field()
+    url = Field()
