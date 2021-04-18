@@ -9,7 +9,7 @@ class GeneralSpider(scrapy.Spider):
     allowed_domains = []
 
     custom_settings = {
-        'CLOSESPIDER_ITEMCOUNT': 100
+        'CLOSESPIDER_ITEMCOUNT': 200
     }
 
     def start_requests(self):
@@ -34,26 +34,23 @@ class GeneralSpider(scrapy.Spider):
             yield response.follow(link, self.parse_link)
 
     def parse_link(self, response):
-        try:
-            link_extractor_second = LinkExtractor()
-            reponse_link = link_extractor_second.extract_links(response)
+        link_extractor_second = LinkExtractor()
+        reponse_link = link_extractor_second.extract_links(response)
 
-            print(f"reponse_link {reponse_link}")
-            for link in reponse_link:
-                print(f"Scrape page {link.url}")
-                url = link.url
-                found = response.follow(url, self.parse_job)
+        print(f"reponse_link {reponse_link}")
+        for link in reponse_link:
+            print(f"Scrape page {link.url}")
+            url = link.url
+            found = response.follow(url, self.parse_job)
 
-                if found:
-                    yield found
-        except:
-            print("error")
+            if found:
+                yield found
 
     def parse_job(self, second_response):
         item = JobsItem()
 
         html = get_html_from_response(second_response)
-        item["title"] = search_title(html)
+        item["title"] = search_general_title(second_response)
         item["description"] = search_description(html)
         item["company_name"] = None
         item["hiring_type"] = search_hiring_type(html)
@@ -62,10 +59,12 @@ class GeneralSpider(scrapy.Spider):
         item["mode"] = search_mode(html)
         item["url"] = second_response.url
 
-        if item["salary"] is not None or \
-                item["mode"] is not None or \
-                item["hierarchy"] is not None or \
-                item["hiring_type"] is not None:
+        if item["salary"] is not None and \
+                (item["mode"] is not None or
+                 item["hierarchy"] is not None or
+                 item["hiring_type"] is not None) and \
+                (item["title"] is not None or
+                 item["description"] is not None):
             return item
         else:
             return None
