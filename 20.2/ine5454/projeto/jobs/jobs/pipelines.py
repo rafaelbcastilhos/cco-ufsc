@@ -14,16 +14,16 @@ def clean_item(item):
     for char in spec_chars:
         if item['title'] is not None:
             item['title'] = item['title'].replace(char, ' ').strip()
-            if len(item['title']) >= 128:
-                item['title'] = item['title'][:125] + "..."
+            if len(item['title']) >= 64:
+                item['title'] = item['title'][:61] + "..."
 
         if item['company_name'] is not None:
             item['company_name'] = item['company_name'].replace(char, '')
 
         if item['description'] is not None:
             item['description'] = item['description'].replace(char, ' ').strip()
-            if len(item['description']) >= 255:
-                item['description'] = item['description'][:252] + "..."
+            if len(item['description']) >= 128:
+                item['description'] = item['description'][:125] + "..."
 
         if item['hierarchy'] is not None:
             item['hierarchy'] = item['hierarchy'].replace(char, '')
@@ -36,8 +36,6 @@ def clean_item(item):
 
         if item['salary'] is not None:
             item['salary'] = item['salary'].replace(char, '')
-        else:
-            item['salary'] = "A combinar"
 
     return item
 

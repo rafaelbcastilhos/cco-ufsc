@@ -60,6 +60,9 @@ def search_salary(html):
         print(f"log salario {salary.group()}")
         return salary.group()
 
+    elif re.search(r'(?i)combinar', html):
+        return "A combinar"
+
     else:
         return None
 
@@ -77,10 +80,77 @@ def search_title(html):
 
 # regex para capturar a descrição da vaga quando possui a palavra chave "descrição || description"
 def search_description(html):
-    description = re.search(r'(?i)[\n\r][ \t]*((job)?descri[cCçÇpP][aAãÃtT][iI]?o[nN]?)[ \t]*([^\n\r]*)[\r\n]+([^\r\n]+)', html)
+    description = re.search(
+        r'(?i)[\n\r][ \t]*((job)?descri[cCçÇpP][aAãÃtT][iI]?o[nN]?)[ \t]*([^n\r]*)[\r\n]+([^\r\n]+)', html)
     if description:
         print(f"log description {description.group()}")
         return description.group()
 
     else:
         return None
+
+
+keywords = [
+    "engenheir", "desenvolvedor", "programador", "arquitet", "cientista", "back", "front", "analista",
+    "devops", "arquitetura", "dispositivo", "mobile", "redes", "android", "redes", "segurança",
+    "infraestrutura", "assistente", "ux", "designer", "web", "api", "integração", "engineer", "developer",
+    "architect", "scientist", "software", "hardware", "iot", "network", "security", "pcd", "full",
+    "stack", "gerente", "gestor", "administrador", "inteligencia", "artificial", "aprendizagem",
+    "maquina", "aplicações", "linux", "machine", "learning", "artificial", "intelligence", "manager",
+    "ágil", "agile", "scrum", "kanban", "sprint", "produto", "marketing", "coordenador", "business"
+]
+
+
+def regex_keyword_element(element):
+    for word in keywords:
+        regex = re.search(r'(?i)(%s)[ \t]*([^\n\r]*)[\r\n]+([^\r\n]+)' % str(word), element)
+        if regex is not None:
+            return regex.group()
+
+
+def regex_keyword_label(label):
+    for word in keywords:
+        label_regex = re.search(r'(?i)(%s)' % str(word), label)
+        if label_regex:
+            return label
+
+
+def search_general_title(response):
+    label_title = response.xpath('//title/text()').get()
+    label_regex = regex_keyword_label(label_title)
+    if label_regex:
+        return label_title
+
+    h1_title = ''.join(response.xpath("//h1/text()").getall())
+    h1_regex = None
+    if label_regex is None:
+        h1_regex = regex_keyword_element(h1_title)
+        if h1_regex:
+            return h1_regex
+
+    h2_title = ''.join(response.xpath("//h2/text()").getall())
+    h2_regex = None
+    if h1_regex is None:
+        h2_regex = regex_keyword_element(h2_title)
+        if h2_regex is not None:
+            return h2_regex
+
+    h3_title = ''.join(response.xpath("//h3/text()").getall())
+    h3_regex = None
+    if h2_regex is None:
+        h3_regex = regex_keyword_element(h3_title)
+        if h3_regex is not None:
+            return h3_regex
+
+    a_title = ''.join(response.xpath("//a/text()").getall())
+    a_regex = None
+    if h3_regex is None:
+        a_regex = regex_keyword_element(a_title)
+        if a_regex is not None:
+            return a_regex
+
+    strong_title = ''.join(response.xpath("//strong/text()").getall())
+    if a_regex is None:
+        strong_regex = regex_keyword_element(strong_title)
+        if strong_regex is not None:
+            return strong_regex
