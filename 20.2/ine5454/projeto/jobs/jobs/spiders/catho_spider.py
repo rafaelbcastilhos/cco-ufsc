@@ -9,13 +9,13 @@ class CathoSpider(scrapy.Spider):
     start_urls = ['https://www.catho.com.br/vagas/cientista-de-dados/']
 
     custom_settings = {
-        'CLOSESPIDER_ITEMCOUNT': 10
+        'CLOSESPIDER_ITEMCOUNT': 20
     }
 
     def parse(self, response):
         self.logger.info(f"Scrape Page {response.url}")
 
-        total = response.xpath("//p[@class='sc-caSCKo ifvWxd']"
+        total = response.xpath("//p[@class='sc-cHGsZl jIsXPm']"
                                "/text()").get()
 
         split = total.split(": ")
@@ -28,29 +28,41 @@ class CathoSpider(scrapy.Spider):
             urls.append("https://www.catho.com.br/vagas/cientista-de-dados/?q=Cientista%20de%20Dados&page=" + str(x))
 
         for url in urls:
-            yield scrapy.Request(url=url, callback=self.parse_job)
+            yield scrapy.Request(url=url, callback=self.parse_page)
 
-    def parse_job(self, second_response):
-
-        jobs = second_response.xpath("//li[@class='sc-cJSrbW eECoeS']")
+    def parse_page(self, second_response):
+        # captura todos os links de cada vaga na determinada pagina
+        jobs = second_response.xpath("//h2[@class='Title__Heading-sc-14fvmc0-0 fGTSAd sc-gPEVay kyrxFQ']"
+                                     "//a"
+                                     "/@href").getall()
 
         for job in jobs:
-            item = JobsItem()
+            yield scrapy.Request(job, callback=self.parse_job)
 
-            title = job.css("::attr(data-gtm-dimension-38)").extract()
-            item["title"] = str(title[0])
+    def parse_job(self, third_response):
+        item = JobsItem()
 
-            item["company_name"] = None
+        item["title"] = third_response.xpath(
+            "//header[@class='headerSugestaoVaga gtm-class']"
+            "//h1"
+            "/text()").get()
 
-            salary = job.css("::attr(data-gtm-dimension-41)").extract()
-            item["salary"] = str(salary[0])
+        item["company_name"] = None
 
-            item["description"] = None
+        item["salary"] = third_response.xpath(
+            "//div[@class='caracteristicasVaga']"
+            "//div"
+            "//span"
+            "/text()").get()
 
-            # html = get_html_from_response(second_response)
-            # item["hiring_type"] = search_hiring_type(html)
-            # item["hierarchy"] = search_hierarchy(html)
-            # item["mode"] = search_mode(html)
-            # item["url"] = second_response.url
+        item["description"] = third_response.xpath(
+            "//p[@id='descricaoVagaTexto']"
+            "/text()").get()
 
-            yield item
+        html = get_html_from_response(third_response)
+        item["hiring_type"] = search_hiring_type(html)
+        item["hierarchy"] = search_hierarchy(html)
+        item["mode"] = search_mode(html)
+        item["url"] = third_response.url
+
+        yield item

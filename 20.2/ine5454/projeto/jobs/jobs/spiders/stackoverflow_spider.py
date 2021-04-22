@@ -8,7 +8,7 @@ class StackoverflowSpider(scrapy.Spider):
     allowed_domains = []
 
     custom_settings = {
-        'CLOSESPIDER_ITEMCOUNT': 10
+        'CLOSESPIDER_ITEMCOUNT': 20
     }
 
     def start_requests(self):
@@ -56,21 +56,6 @@ class StackoverflowSpider(scrapy.Spider):
             "//div[@class='fc-black-700 mb4 sticky:mb0 sticky:mr8 fs-body2 sticky:fs-body1 sticky:sm:fs-caption']"
             "//a"
             "/text()").get()
-
-        # item["mode"] = second_response.xpath(
-        #     "//span[@class='fc-yellow-500']"
-        #     "/text()").get()
-
-        # item["salary"] = second_response.xpath(
-        #     "//span[@class='fc-green-400']"
-        #     "/text()").get()
-
-        # item["hierarchy"] = second_response.xpath(
-        #     "//div[@class='grid gs16 gsx sm:fd-column fs-body2 fc-medium']"
-        #     "//div[@class='grid--cell6']"
-        #     "//div[2]"
-        #     "//span[@class='fw-bold']"
-        #     "/text()").get()
 
         item["description"] = second_response.xpath(
             "//div[@class='grid gs16 gsx sm:fd-column fs-body2 fc-medium']"

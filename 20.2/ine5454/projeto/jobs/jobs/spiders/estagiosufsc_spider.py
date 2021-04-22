@@ -8,7 +8,7 @@ class EstagiosUFSCSpider(scrapy.Spider):
     allowed_domains = []
 
     custom_settings = {
-        'CLOSESPIDER_ITEMCOUNT': 10
+        'CLOSESPIDER_ITEMCOUNT': 20
     }
 
     def start_requests(self):
@@ -39,16 +39,8 @@ class EstagiosUFSCSpider(scrapy.Spider):
         # percorre a página e extrai as informações necessárias
         item = JobsItem()
 
-        # item["title"] = second_response.xpath(
-        #     "//div[@class='inner']"
-        #     "//h1"
-        #     "//strong"
-        #     "/text()").get()
-
-        # item["hierarchy"] = second_response.xpath(
-        #     "//div[@id='type_dates']"
-        #     "//strong"
-        #     "/text()").get()
+        html = get_html_from_response(second_response)
+        item["title"] = search_title(second_response)
 
         description = second_response.xpath(
             "//div[@id='description']"
@@ -57,18 +49,7 @@ class EstagiosUFSCSpider(scrapy.Spider):
             "//strong"
             "/text()").getall()
 
-        # if("Remuneração: " in description):
-        #     index = description.index("Remuneração: ") + 2
-
-        #     item["salary"] = second_response.xpath(
-        #         "//div[@id='description']"
-        #         "//ul"
-        #         "//li[" + str(index) + "]"
-        #         "/text()").get()
-        # else:
-        #     item["salary"] = None
-
-        if("Conhecimentos Desenvolvidos: " in description):
+        if "Conhecimentos Desenvolvidos: " in description:
             index = description.index("Conhecimentos Desenvolvidos: ") + 2
             description = second_response.xpath(
                 "//div[@id='description']"
@@ -82,8 +63,6 @@ class EstagiosUFSCSpider(scrapy.Spider):
 
         item["company_name"] = None
 
-        html = get_html_from_response(second_response)
-        item["title"] = search_title(html)
         item["hiring_type"] = search_hiring_type(html)
         item["hierarchy"] = search_hierarchy(html)
         item["salary"] = search_salary(html)

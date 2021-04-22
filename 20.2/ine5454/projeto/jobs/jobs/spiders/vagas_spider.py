@@ -8,7 +8,7 @@ class VagasSpider(scrapy.Spider):
     allowed_domains = []
 
     custom_settings = {
-        'CLOSESPIDER_ITEMCOUNT': 10
+        'CLOSESPIDER_ITEMCOUNT': 20
     }
 
     def start_requests(self):
@@ -58,20 +58,10 @@ class VagasSpider(scrapy.Spider):
             "//h2"
             "/text()").get()
 
-        # item["salary"] = second_response.xpath(
-        #     "//div[@class='infoVaga']"
-        #     "//ul"
-        #     "//li"
-        #     "//div"
-        #     "//span[2]"
-        #     "/text()").get()
-
-        # item["hierarchy"] = second_response.xpath(
-        #     "//div[@class='job-hierarchylist']"
-        #     "//span"
-        #     "/@aria-label").get()
-
-        item["description"] = None
+        item["description"] = second_response.xpath(
+            "//div[@class='job-tab-content job-description__text texto']"
+            "//p[1]"
+            "/text()").get()
 
         html = get_html_from_response(second_response)
         item["hiring_type"] = search_hiring_type(html)
