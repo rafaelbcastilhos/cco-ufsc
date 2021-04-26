@@ -40,7 +40,7 @@ begin
                     PEstado <= Espera1;
                 elsif (TRY(2) = '1') then
                     PEstado <= Correto1;
-                else
+                else    
                     PEstado <= Espera1;
             end if;
             when Correto1 => O <= '0';
