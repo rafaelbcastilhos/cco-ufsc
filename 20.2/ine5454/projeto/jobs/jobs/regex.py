@@ -38,6 +38,18 @@ def search_hiring_type(html):
         return None
 
 
+# xpath sibling para capturar o nome da empresa
+def search_company_name(response, title):
+    company_name = response.xpath("../preceding-sibling::text()[contains(., '%s')]" % title)
+
+    if company_name:
+        print(f"log company name {company_name.group()}")
+        return company_name.group()
+
+    else:
+        return None
+
+
 # regex para capturar o modo de trabalho
 def search_mode(html):
     if re.search(r'(?i)presencial', html) or re.search(r'(?i)on[-\s]?site', html):
@@ -67,12 +79,12 @@ def search_salary(html):
         return None
 
 
-# regex para capturar o título da vaga quando inicia com "Vaga 'de || em'"
-def search_title(html):
-    title = re.search(r'(?i)[\n\r][ \t]*(vaga (de|em)?)[ \t]*([^\n\r]*)', html)
-    if title:
-        print(f"log title {title.group()}")
-        return title.group()
+# regex para capturar o título da vaga na tag title
+def search_title(response):
+    label_title = response.xpath('//title/text()').get()
+    if label_title:
+        print(f"log title {label_title}")
+        return label_title
 
     else:
         return None
@@ -91,13 +103,10 @@ def search_description(html):
 
 
 keywords = [
-    "engenheir", "desenvolvedor", "programador", "arquitet", "cientista", "back", "front", "analista",
-    "devops", "arquitetura", "dispositivo", "mobile", "redes", "android", "redes", "segurança",
-    "infraestrutura", "assistente", "ux", "designer", "web", "api", "integração", "engineer", "developer",
-    "architect", "scientist", "software", "hardware", "iot", "network", "security", "pcd", "full",
-    "stack", "gerente", "gestor", "administrador", "inteligencia", "artificial", "aprendizagem",
-    "maquina", "aplicações", "linux", "machine", "learning", "artificial", "intelligence", "manager",
-    "ágil", "agile", "scrum", "kanban", "sprint", "produto", "marketing", "coordenador", "business"
+    "engenheir", "desenvolvedor", "programador", "arquitet", "cientista", "back", "front", "analista", "sistema",
+    "devops", "assistente", "ux", "designer", "engineer", "developer", "architect", "scientist", "software",
+    "pcd", "full", "stack", "gerente", "gestor", "administrador", "manager", "marketing", "informática",
+    "coordenador", "comercial", "talento", "executivo", "vendas", "estágio", "estagiári", "técnico", "especialista"
 ]
 
 
