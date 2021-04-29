@@ -6,13 +6,19 @@ from ..regex import *
 class CathoSpider(scrapy.Spider):
     name = "catho_spider"
 
-    start_urls = ['https://www.catho.com.br/vagas/cientista-de-dados/']
+    start_urls = ["https://www.catho.com.br/vagas/cientista-de-dados/"]
 
     custom_settings = {
         'CLOSESPIDER_ITEMCOUNT': 20
     }
 
     def parse(self, response):
+        """
+        This function parses catho home page
+        @url https://www.catho.com.br/vagas/cientista-de-dados/
+        @returns request to next pages
+        @scrapes number of pages
+        """
         self.logger.info(f"Scrape Page {response.url}")
 
         total = response.xpath("//p[@class='sc-cHGsZl jIsXPm']"
@@ -31,7 +37,12 @@ class CathoSpider(scrapy.Spider):
             yield scrapy.Request(url=url, callback=self.parse_page)
 
     def parse_page(self, second_response):
-        # captura todos os links de cada vaga na determinada pagina
+        """
+        This function parses catho secundary pages
+        @url https://www.catho.com.br/vagas/cientista-de-dados/?q=Cientista%20de%20Dados&page={number_of_page}
+        @returns request to extract links
+        @scrapes all jobs links
+        """
         jobs = second_response.xpath("//h2[@class='Title__Heading-sc-14fvmc0-0 fGTSAd sc-gPEVay kyrxFQ']"
                                      "//a"
                                      "/@href").getall()
@@ -40,6 +51,11 @@ class CathoSpider(scrapy.Spider):
             yield scrapy.Request(job, callback=self.parse_job)
 
     def parse_job(self, third_response):
+        """
+        This function parses catho job pages
+        @returns job item
+        @scrapes title, salary, description, hiring_type, hierarchy and mode
+        """
         item = JobsItem()
 
         item["title"] = third_response.xpath(

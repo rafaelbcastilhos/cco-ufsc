@@ -11,16 +11,17 @@ class EstagiosUFSCSpider(scrapy.Spider):
         'CLOSESPIDER_ITEMCOUNT': 20
     }
 
-    def start_requests(self):
-        # realiza a requisicao para uma seed
-        urls = ["https://estagios.ufsc.br/index.php?page=search&cursos%5B%5D=208"]
-        for url in urls:
-            yield scrapy.Request(url=url, callback=self.parse)
+    start_urls = ["https://estagios.ufsc.br/index.php?page=search&cursos%5B%5D=208"]
 
     def parse(self, response):
+        """
+        This function parses estagios ufsc computer science page
+        @url https://estagios.ufsc.br/index.php?page=search&cursos%5B%5D=208
+        @returns request to extract links
+        @scrapes all jobs links
+        """
         self.logger.info(f"Scrape Page {response.url}")
 
-        # percorre toda lista de vagas e captura o link de cada uma
         jobs_links = response.xpath("//table"
                                     "//tbody"
                                     "//tr"
@@ -31,12 +32,15 @@ class EstagiosUFSCSpider(scrapy.Spider):
 
         self.logger.info(f"links especificos {jobs_links}, tamanho {len(jobs_links)}")
 
-        # se houver links na lista de vagas, percorre um por um e realiza a requisição
         if jobs_links:
             yield from response.follow_all(jobs_links, callback=self.parse_job)
 
     def parse_job(self, second_response):
-        # percorre a página e extrai as informações necessárias
+        """
+        This function parses estagios ufsc job pages
+        @returns job item
+        @scrapes title, description, company_name, hiring_type, hierarchy, salary and mode
+        """
         item = JobsItem()
 
         html = get_html_from_response(second_response)
@@ -59,9 +63,9 @@ class EstagiosUFSCSpider(scrapy.Spider):
             ).getall()
             item["description"] = ' '.join(description)
         else:
-            item["description"] = None
+            item["description"] = search_description(html)
 
-        item["company_name"] = None
+        item["company_name"] = search_company_name(second_response, item["title"])
 
         item["hiring_type"] = search_hiring_type(html)
         item["hierarchy"] = search_hierarchy(html)
