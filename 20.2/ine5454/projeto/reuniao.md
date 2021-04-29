@@ -48,3 +48,24 @@
 3. erro DNS lookup failed: no results for hostname lookup em https://www.nextshipping.com.br/
 
 4. inicio de criacao pagina web
+
+### Reunião 6
+
+1. conjunto de palavras que fazem sentido pro contexto de um titulo de vaga
+
+2. extração do titulo verificando se a string possui alguma palavra do conjunto
+   - tag title
+   - tags h1, h2, ...
+   - tag strong
+
+3. adição de verificação se o item extráido possui determinados atributos diferente de nulo
+
+### Reunião 7
+
+1. atualização do arquivo no drive
+
+2. juntamente a entrega final, deverá ser entregue a infraestrutura de virtualização e containers ou apenas o fonte?
+
+3. possibilidade de não estar presente na próxima reunião
+
+
