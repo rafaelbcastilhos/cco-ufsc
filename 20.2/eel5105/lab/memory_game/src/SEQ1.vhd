@@ -3,8 +3,8 @@ library ieee;
 use ieee.std_logic_1164.all;
 ------------------------------------
 entity SEQ1 is port (
-	address: in std_logic_vector(3 downto 0);
-	data: out std_logic_vector(17 downto 0) 
+	address : in std_logic_vector(3 downto 0);
+	data : out std_logic_vector(17 downto 0) 
 );
 end entity;
 
@@ -27,11 +27,10 @@ architecture Rom_Arch of SEQ1 is
 		13 => "000000000110010001",
 		14 => "000000001000101100",
 		15 => "111111111111111111");
-
 begin
 	process (address) --//o adress vai ser o número da rodada.
 	begin
-	case address is
+		case address is
 		when "0000" => data <= my_rom(00);
 		when "0001" => data <= my_rom(01);
 		when "0010" => data <= my_rom(02);
