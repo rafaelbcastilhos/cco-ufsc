@@ -23,11 +23,13 @@ architecture counterb of counterbonus is
 				OUT_END_BONUS <= '0';
 			elsif (CLK_500Hz'event AND CLK_500Hz = '1') then 
 				if E = '1' then 
-					counter <= IN_COUNTER_BONUS;
-					OUT_COUNTER_BONUS <= (not counter);
+					counter <= "000000";
 					if (counter < "000000") then
 						OUT_END_BONUS <= '1';
+					else
+						OUT_END_BONUS <= '0';
 					end if;
+					OUT_COUNTER_BONUS <= (not counter);
 				end if;
 			end if;
 		end process;

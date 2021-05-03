@@ -19,11 +19,12 @@ architecture counterl of counterlevel is
 				counter <= "0000";
 			elsif (CLK_1Hz'event AND CLK_1Hz = '1') then 
 				if E = '1' then 
-				counter <= IN_COUNTER_LEVEL;
-				counter <= counter + 1;
-					OUT_END_FPGA <= '1';
-					if (counter = "1111") then
+					counter <= counter + 1;
+					if (counter = IN_COUNTER_LEVEL) then
 						counter <= "0000";
+						OUT_END_FPGA <= '1';
+					else
+						OUT_END_FPGA <= '0';
 					end if;
 				end if;
 			end if;

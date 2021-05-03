@@ -12,23 +12,24 @@ entity counterround is port (
 end counterround;
 
 architecture counterr of counterround is
-    signal counter, setup: std_logic_vector(3 downto 0);
+    signal counter, setup: std_logic_vector(3 downto 0) := "0000";
 	begin
 		process(CLK_500Hz, E, SET)
 		begin
 			if (SET = '1') then
 				setup <= IN_SET_SETUP_ROUND;
 				setup <= setup - 1;
-				OUT_END_ROUND <= '0';
 				OUT_COUNTER_ROUND <= setup;
+				OUT_END_ROUND <= '0';
 			elsif (CLK_500Hz'event AND CLK_500Hz = '1') then 
 				if E = '1' then
-					counter <= IN_COUNTER_ROUND;
 					counter <= counter - 1;
-					OUT_END_ROUND <= '1';
-					-- if (IN_COUNTER_ROUND = "0000") then
-					-- 	IN_COUNTER_ROUND <= "0000";
-					-- end if;
+					if(counter = IN_COUNTER_ROUND) then
+						counter <= "0000";
+						OUT_END_ROUND <= '1';
+					else 
+						OUT_END_ROUND <= '0';
+					end if;
 					OUT_COUNTER_ROUND <= counter;
 				end if;
 			end if;
