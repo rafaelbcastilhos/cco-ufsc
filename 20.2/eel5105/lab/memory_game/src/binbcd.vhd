@@ -26,6 +26,6 @@ begin
                 "00010011" when "1101",
                 "00010100" when "1110",
                 "00010101" when "1111",
-                "11111111" when others;
+                "00000000" when others;
 
 end architecture binBCD;
