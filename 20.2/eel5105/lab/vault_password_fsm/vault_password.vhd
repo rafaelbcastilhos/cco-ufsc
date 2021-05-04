@@ -27,7 +27,8 @@ begin
     process(EAtual, TRY)
 	begin
 		case EAtual is
-            when Inicio => O <= '0';
+            when Inicio => 
+                O <= '0';
                 if(TRY(2 downto 0) = "111") then
                     PEstado <= Inicio;
                 elsif (TRY(2 downto 0) = "011") then
