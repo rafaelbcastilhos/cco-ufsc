@@ -140,7 +140,6 @@ begin
     REG_setup: regsetup port map(sw_entra(13 downto 0), r1, e1, clk50, SETUP);
     r1_or_e4 <= r1 or e4;
     Counter_level: counterlevel port map(SETUP(9 downto 6), r1_or_e4, e2, clk1, out_end_FPGA);
-    -- led_out(0) <= not out_end_FPGA;
     Counter_time: countertime port map("1010", r1_or_e4, e3, clk1, out_end_time, TIME_OUT);
     Counter_round: counterround port map("0000", SETUP(3 downto 0), e1, e4, clk50, out_end_round, ROUND_OUT);
 
@@ -156,7 +155,6 @@ begin
     seq_fpga_xor_sw_entra <= SEQ_FPGA xor sw_entra;
     SUM_BIT_BIT: sum port map(seq_fpga_xor_sw_entra, SUM_BIT_BIT_OUT);
 
-    -- ver oq o counter bonus precisa fazer
     e3_and_not_key_entra <= e3 and (not key_entra);
     Counter_bonus: counterbonus port map(SUM_BIT_BIT_OUT, SETUP(13 downto 10), e1, e3_and_not_key_entra, clk50, out_end_bonus, BONUS);
 
@@ -166,7 +164,7 @@ begin
     end_time <= out_end_time;
     end_bonus <= out_end_bonus;
     end_round_aux <= out_end_round;
-    end_round <= out_end_round;
+    end_round <= out_end_round; 
     end_FPGA <= out_end_FPGA;
 
     -- ledr

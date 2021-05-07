@@ -1,6 +1,7 @@
 library ieee;
 use ieee.std_logic_1164.all;
 use ieee.std_logic_unsigned.all;
+use ieee.std_logic_arith.all;
 
 entity counterround is port (
 	IN_COUNTER_ROUND: in std_logic_vector(3 downto 0);
@@ -12,17 +13,15 @@ entity counterround is port (
 end counterround;
 
 architecture counterr of counterround is
-    signal counter, setup: std_logic_vector(3 downto 0) := "0000";
+    signal counter: std_logic_vector(3 downto 0) := "0000";
 	begin
-		process(CLK_500Hz, E, SET)
+		process(CLK_500Hz, SET, E, counter)
 		begin
 			if (SET = '1') then
-				setup <= IN_SET_SETUP_ROUND;
-				setup <= setup - 1;
-				OUT_COUNTER_ROUND <= setup;
+				counter <= IN_SET_SETUP_ROUND - 1;
 				OUT_END_ROUND <= '0';
 			elsif (CLK_500Hz'event AND CLK_500Hz = '1') then 
-				if E = '1' then
+				if (E = '1') then
 					counter <= counter - 1;
 					if(counter = IN_COUNTER_ROUND) then
 						counter <= "0000";
@@ -30,8 +29,8 @@ architecture counterr of counterround is
 					else 
 						OUT_END_ROUND <= '0';
 					end if;
-					OUT_COUNTER_ROUND <= counter;
 				end if;
 			end if;
 		end process;
+		OUT_COUNTER_ROUND <= counter;
 end counterr;

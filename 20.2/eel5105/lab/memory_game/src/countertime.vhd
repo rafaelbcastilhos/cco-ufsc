@@ -1,6 +1,7 @@
 library ieee;
 use ieee.std_logic_1164.all;
 use ieee.std_logic_unsigned.all;
+use ieee.std_logic_arith.all;
 
 entity countertime is port (
 	IN_COUNTER_TIME: in std_logic_vector(3 downto 0);
@@ -13,13 +14,13 @@ end countertime;
 architecture countert of countertime is
     signal counter: std_logic_vector(3 downto 0);
 	begin
-		process(CLK_1Hz, E, R)
+		process(CLK_1Hz, R)
 		begin
 			if (R = '1') then
 				OUT_END_TIME <= '0';
 				counter <= "0000";
 			elsif (CLK_1Hz'event AND CLK_1Hz = '1') then 
-				if E = '1' then 
+				if (E = '1') then 
 					counter <= counter + 1;
 					if (counter = IN_COUNTER_TIME) then
 						OUT_END_TIME <= '1';
@@ -27,8 +28,8 @@ architecture countert of countertime is
 					else
 						OUT_END_TIME <= '0';
 					end if;
-					OUT_COUNTER_TIME <= counter;
 				end if;
 			end if;
 		end process;
+		OUT_COUNTER_TIME <= counter;
 end countert;

@@ -14,7 +14,7 @@ begin
     process(clock, reset)
 	begin
         if (reset = '0') then
-                EAtual <= start;
+            EAtual <= start;
         elsif (clock'event AND clock = '1') then 
             EAtual <= PEstado;
         end if;
@@ -25,7 +25,7 @@ begin
 				case EAtual is 
                     when start =>
                         r1 <= '1';
-                        e1 <= '0';
+                        e1 <= '1';
                         e2 <= '0';
                         e3 <= '0';
                         e4 <= '0';
@@ -36,14 +36,12 @@ begin
                         r1 <= '0';
                         e1 <= '1';
                         e2 <= '0';
-                        e3 <= '0';
+                        e3 <= '1';
                         e4 <= '0';
                         e5 <= '0';
                         e6 <= '0';
                         if(enter = '0') then
                             PEstado <= play_fpga;
-                        else
-                            PEstado <= setup;
                         end if;
                     when play_fpga =>
                         r1 <= '0';
@@ -96,7 +94,7 @@ begin
                         e1 <= '0';
                         e2 <= '0';
                         e3 <= '0';
-                        e4 <= '1';
+                        e4 <= '0';
                         e5 <= '1';
                         e6 <= '0';
                         if(enter = '0') then
@@ -119,3 +117,21 @@ begin
     end process;
 
 end fsmcontrolador;
+
+
+-- when setup =>
+-- r1 <= '0';
+-- e1 <= '1';
+-- e2 <= '0';
+-- e3 <= '1';
+-- e4 <= '0';
+-- e5 <= '0';
+-- e6 <= '0';
+-- when wait1 =>
+-- r1 <= '0';
+-- e1 <= '0';
+-- e2 <= '1';
+-- e3 <= '1';
+-- e4 <= '1';
+-- e5 <= '1';
+-- e6 <= '0';

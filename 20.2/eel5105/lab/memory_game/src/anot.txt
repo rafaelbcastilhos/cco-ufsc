@@ -1,0 +1,3 @@
+round fixo em 0
+level nao aumenta, sempre em A
+result entra e logo sai, pisca user/fpga e muda

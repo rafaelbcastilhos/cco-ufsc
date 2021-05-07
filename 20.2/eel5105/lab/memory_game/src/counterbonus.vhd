@@ -1,6 +1,7 @@
 library ieee;
 use ieee.std_logic_1164.all;
 use ieee.std_logic_unsigned.all;
+use ieee.std_logic_arith.all;
 
 entity counterbonus is port (
 	IN_COUNTER_BONUS: in std_logic_vector(5 downto 0);
@@ -12,25 +13,23 @@ entity counterbonus is port (
 end counterbonus;
 
 architecture counterb of counterbonus is
-    signal setup: std_logic_vector(3 downto 0);
-    signal counter: std_logic_vector(5 downto 0);
+    signal counter: std_logic_vector(5 downto 0) := "000000";
 	begin
-		process(CLK_500Hz, E, SET)
+		process(CLK_500Hz, SET)
 		begin
 			if (SET = '1') then
-				setup <= IN_SET_SETUP_BONUS;
-				OUT_COUNTER_BONUS <= "00" & setup;
+				counter <= "00" & IN_SET_SETUP_BONUS;
 				OUT_END_BONUS <= '0';
 			elsif (CLK_500Hz'event AND CLK_500Hz = '1') then 
-				if E = '1' then 
-					counter <= "000000";
+				if (E = '1') then 
+					counter <= counter - IN_COUNTER_BONUS;
 					if (counter < "000000") then
 						OUT_END_BONUS <= '1';
 					else
 						OUT_END_BONUS <= '0';
 					end if;
-					OUT_COUNTER_BONUS <= (not counter);
 				end if;
 			end if;
 		end process;
+		OUT_COUNTER_BONUS <= counter;
 end counterb;
