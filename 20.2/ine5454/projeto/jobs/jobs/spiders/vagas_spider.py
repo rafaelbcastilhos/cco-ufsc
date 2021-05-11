@@ -8,7 +8,7 @@ class VagasSpider(scrapy.Spider):
     allowed_domains = []
 
     custom_settings = {
-        'CLOSESPIDER_ITEMCOUNT': 20
+        'CLOSESPIDER_ITEMCOUNT': 1000
     }
 
     start_urls = ["https://www.vagas.com.br/vagas-de-devops"]
