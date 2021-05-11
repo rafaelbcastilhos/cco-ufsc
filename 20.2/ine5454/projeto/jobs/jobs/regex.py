@@ -38,18 +38,6 @@ def search_hiring_type(html):
         return None
 
 
-# xpath sibling para capturar o nome da empresa
-def search_company_name(response, title):
-    company_name = response.xpath("../preceding-sibling::text()[contains(., '%s')]" % title)
-
-    if company_name:
-        print(f"log company name {company_name.group()}")
-        return company_name.group()
-
-    else:
-        return None
-
-
 # regex para capturar o modo de trabalho
 def search_mode(html):
     if re.search(r'(?i)presencial', html) or re.search(r'(?i)on[-\s]?site', html):
@@ -77,6 +65,14 @@ def search_salary(html):
 
     else:
         return None
+
+
+def get_digits(salary):
+    digits = re.search(r'(?i)(\d+)', salary)
+    if digits:
+        return float(digits.group())
+    else:
+        return 0
 
 
 # regex para capturar o título da vaga na tag title
