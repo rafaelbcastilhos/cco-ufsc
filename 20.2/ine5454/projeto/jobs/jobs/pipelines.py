@@ -6,36 +6,37 @@
 
 # useful for handling different item types with a single interface
 import json
+import re
 from itemadapter import ItemAdapter
 
 
 def clean_item(item):
-    spec_chars = ["¦", "ð", "Ÿ", "¥", "³", "\n", "\b", "<br>", "\r", "  ", "•", "\t"]
-    for char in spec_chars:
-        if item['title'] is not None:
-            item['title'] = item['title'].replace(char, ' ').strip()
-            if len(item['title']) >= 64:
-                item['title'] = item['title'][:61] + "..."
+    expression = re.compile(r'[^\x20-\xEB]')
 
-        if item['company_name'] is not None:
-            item['company_name'] = item['company_name'].replace(char, '')
+    if item['title'] is not None:
+        item['title'] = expression.sub("", item["title"]).strip()
+        if len(item['title']) >= 64:
+            item['title'] = item['title'][:61] + "..."
 
-        if item['description'] is not None:
-            item['description'] = item['description'].replace(char, ' ').strip()
-            if len(item['description']) >= 128:
-                item['description'] = item['description'][:125] + "..."
+    if item['company_name'] is not None:
+        item['company_name'] = expression.sub("", item["company_name"]).strip()
 
-        if item['hierarchy'] is not None:
-            item['hierarchy'] = item['hierarchy'].replace(char, '')
+    if item['description'] is not None:
+        item['description'] = expression.sub("", item["description"]).strip()
+        if len(item['description']) >= 128:
+            item['description'] = item['description'][:125] + "..."
 
-        if item['hiring_type'] is not None:
-            item['hiring_type'] = item['hiring_type'].replace(char, '')
+    if item['hierarchy'] is not None:
+        item['hierarchy'] = expression.sub("", item["hierarchy"]).strip()
 
-        if item['mode'] is not None:
-            item['mode'] = item['mode'].replace(char, '')
+    if item['hiring_type'] is not None:
+        item['hiring_type'] = expression.sub("", item["hiring_type"]).strip()
 
-        if item['salary'] is not None:
-            item['salary'] = item['salary'].replace(char, '')
+    if item['mode'] is not None:
+        item['mode'] = expression.sub("", item["mode"]).strip()
+
+    if item['salary'] is not None:
+        item['salary'] = expression.sub("", item["salary"]).strip()
 
     return item
 
