@@ -136,36 +136,49 @@ architecture arqdata of datapath is
     end component;
 
 begin
-
+    -- map port para registrador setup
     REG_setup: regsetup port map(sw_entra(13 downto 0), r1, e1, clk50, SETUP);
     r1_or_e4 <= r1 or e4;
+
+    -- map port para contador de level
     Counter_level: counterlevel port map(SETUP(9 downto 6), r1_or_e4, e2, clk1, out_end_FPGA);
+
+    -- map port para contador de tempo
     Counter_time: countertime port map("1010", r1_or_e4, e3, clk1, out_end_time, TIME_OUT);
+
+    -- map port para contador de rodada
     Counter_round: counterround port map("0000", SETUP(3 downto 0), e1, e4, clk50, out_end_round, ROUND_OUT);
 
     dec4binx8bcd: decBCD port map(ROUND_OUT, ROUND_BCD);
 
+    -- map ports para sequencias
     SEQ_1: SEQ1 port map(ROUND_OUT, SEQ1_OUT);
     SEQ_2: SEQ2 port map(ROUND_OUT, SEQ2_OUT);
     SEQ_3: SEQ3 port map(ROUND_OUT, SEQ3_OUT);
     SEQ_4: SEQ4 port map(ROUND_OUT, SEQ4_OUT);
 
+    -- map port para escolher qual sequencia
     MUX4x1: mux4to1 port map(SEQ1_OUT, SEQ2_OUT, SEQ3_OUT, SEQ4_OUT, SETUP(5 downto 4), SEQ_FPGA);
 
     seq_fpga_xor_sw_entra <= SEQ_FPGA xor sw_entra;
+
+    -- map port para soma de bits entre entrada e sequencia
     SUM_BIT_BIT: sum port map(seq_fpga_xor_sw_entra, SUM_BIT_BIT_OUT);
 
     e3_and_not_key_entra <= e3 and (not key_entra);
+
+    -- map port para contador de bonus
     Counter_bonus: counterbonus port map(SUM_BIT_BIT_OUT, SETUP(13 downto 10), e1, e3_and_not_key_entra, clk50, out_end_bonus, BONUS);
 
     F_POINTS <= "00" & ROUND_OUT & (not BONUS);
     U_POINTS <= "00" & (not ROUND_OUT) & BONUS;
 
+    -- status
     end_time <= out_end_time;
     end_bonus <= out_end_bonus;
-    end_round_aux <= out_end_round;
-    end_round <= out_end_round; 
     end_FPGA <= out_end_FPGA;
+    end_round <= out_end_round; 
+    end_round_aux <= out_end_round;
 
     -- ledr
     mux2x1_18_ledr: mux2to1_18b port map("000000000000000000", SEQ_FPGA, e2, led_out);

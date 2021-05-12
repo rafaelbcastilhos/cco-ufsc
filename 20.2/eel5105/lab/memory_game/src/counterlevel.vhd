@@ -15,6 +15,7 @@ architecture counterl of counterlevel is
 	begin
 		process(CLK_1Hz, R)
 		begin
+			-- reset assíncrono
 			if (R = '1') then
 				OUT_END_FPGA <= '0';
 				counter <= "0000";
