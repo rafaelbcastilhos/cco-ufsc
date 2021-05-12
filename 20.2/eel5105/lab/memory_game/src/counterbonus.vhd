@@ -13,23 +13,25 @@ entity counterbonus is port (
 end counterbonus;
 
 architecture counterb of counterbonus is
-    signal counter: std_logic_vector(5 downto 0) := "000000";
+    signal counter: std_logic_vector(5 downto 0) := IN_COUNTER_BONUS;
 	begin
-		process(CLK_500Hz, SET)
+		process(CLK_500Hz, SET, counter)
 		begin
+			-- set assíncrono
 			if (SET = '1') then
 				counter <= "00" & IN_SET_SETUP_BONUS;
 				OUT_END_BONUS <= '0';
 			elsif (CLK_500Hz'event AND CLK_500Hz = '1') then 
 				if (E = '1') then 
 					counter <= counter - IN_COUNTER_BONUS;
-					if (counter < "000000") then
-						OUT_END_BONUS <= '1';
-					else
-						OUT_END_BONUS <= '0';
-					end if;
+				end if;
+				if (counter < "000000") then
+					OUT_END_BONUS <= '1';
+				else
+					OUT_END_BONUS <= '0';
 				end if;
 			end if;
 		end process;
+
 		OUT_COUNTER_BONUS <= counter;
 end counterb;
