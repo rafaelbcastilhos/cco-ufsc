@@ -12,9 +12,9 @@ end regsetup;
 
 architecture behv of regsetup is
 begin
-	process(CLK_500Hz,R,E)
+	process(CLK_500Hz, R, E)
 	begin
-		if (R = '1' and E='1') then
+		if (R = '1' and E = '1') then
 			OUT_REG_SETUP <= "00000000000000";
 		elsif (CLK_500Hz'event and CLK_500Hz = '1') then
 			if (E = '1') then
