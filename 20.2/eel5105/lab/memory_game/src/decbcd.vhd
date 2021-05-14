@@ -9,23 +9,21 @@ end entity decBCD;
 
 architecture binBCD of decBCD is
 begin
-    with bin_in select
-    bcd_out <= "00000000" when "0000",
-                "00000001" when "0001",
-                "00000010" when "0010",
-                "00000011" when "0011",
-                "00000100" when "0100",
-                "00000101" when "0101",
-                "00000110" when "0110",
-                "00000111" when "0111",
-                "00001000" when "1000",
-                "00001001" when "1001",
-                "00010000" when "1010",
-                "00010001" when "1011",
-                "00010010" when "1100",
-                "00010011" when "1101",
-                "00010100" when "1110",
-                "00010101" when "1111",
-                "00000000" when others;
+    bcd_out <= "00000000" when bin_in = "0000" else
+        "00000001" when bin_in = "0001" else
+        "00000010" when bin_in = "0010" else
+        "00000011" when bin_in = "0011" else
+        "00000100" when bin_in = "0100" else
+        "00000101" when bin_in = "0101" else
+        "00000110" when bin_in = "0110" else
+        "00000111" when bin_in = "0111" else
+        "00001000" when bin_in = "1000" else
+        "00001001" when bin_in = "1001" else
+        "00010000" when bin_in = "1010" else
+        "00010001" when bin_in = "1011" else
+        "00010010" when bin_in = "1100" else
+        "00010011" when bin_in = "1101" else
+        "00010100" when bin_in = "1110" else
+        "00010101";
 
 end architecture binBCD;
