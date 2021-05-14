@@ -12,7 +12,7 @@ entity countertime is port (
 end countertime;
 
 architecture countert of countertime is
-    signal counter: std_logic_vector(3 downto 0);
+    signal counter: std_logic_vector(3 downto 0) := "0000";
 	begin
 		process(CLK_1Hz, R)
 		begin
@@ -22,15 +22,16 @@ architecture countert of countertime is
 				counter <= "0000";
 			elsif (CLK_1Hz'event AND CLK_1Hz = '1') then 
 				if (E = '1') then 
-					counter <= counter + 1;
 					if (counter = IN_COUNTER_TIME) then
 						OUT_END_TIME <= '1';
 						counter <= "0000";
 					else
+						counter <= counter + "0001";
 						OUT_END_TIME <= '0';
 					end if;
 				end if;
 			end if;
 		end process;
+
 		OUT_COUNTER_TIME <= counter;
 end countert;
