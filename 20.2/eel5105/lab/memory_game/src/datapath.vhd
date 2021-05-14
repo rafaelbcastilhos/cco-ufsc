@@ -12,30 +12,30 @@ entity datapath is port(
 end datapath;
 
 architecture arqdata of datapath is
-    signal out_end_time, out_end_bonus, out_end_round, out_end_FPGA, end_round_aux: std_logic;
-    signal r1_or_e4, e3_and_not_key_entra: std_logic;
-    signal SETUP: std_logic_vector(13 downto 0);
-    signal TIME_OUT, ROUND_OUT, concat_hex4: std_logic_vector(3 downto 0);
-    signal ROUND_BCD: std_logic_vector(7 downto 0);
-    signal SEQ1_OUT, SEQ2_OUT, SEQ3_OUT, SEQ4_OUT, SEQ_FPGA, seq_fpga_xor_sw_entra: std_logic_vector(17 downto 0);
-    signal SUM_BIT_BIT_OUT, BONUS: std_logic_vector(5 downto 0);
-    signal F_POINTS, U_POINTS: std_logic_vector(11 downto 0);
+    signal out_end_time, out_end_bonus, out_end_round, out_end_FPGA, end_round_aux: std_logic; -- sinais de saida
+    signal r1_or_e4, e3_and_not_key_entra: std_logic; -- expressoes de reset e enable
+    signal SETUP: std_logic_vector(13 downto 0); -- saida do setup
+    signal TIME_OUT, ROUND_OUT, concat_hex4: std_logic_vector(3 downto 0); -- saida do contador de tempo e round
+    signal ROUND_BCD: std_logic_vector(7 downto 0); -- saida da conversao de bin para bcd
+    signal SEQ1_OUT, SEQ2_OUT, SEQ3_OUT, SEQ4_OUT, SEQ_FPGA, seq_fpga_xor_sw_entra: std_logic_vector(17 downto 0); -- saida das sequencia, fpga e expressao xor
+    signal SUM_BIT_BIT_OUT, BONUS_OUT: std_logic_vector(5 downto 0); -- saida de soma de bits da comparacao e saida do contador de bonus
+    signal F_POINTS, U_POINTS: std_logic_vector(11 downto 0); -- & de pontos
 
-    signal OUT_1_HEX7, OUT_2_HEX7: std_logic_vector(6 downto 0);
-    signal OUT_DEC_HEX6, OUT_1_HEX6, OUT_2_HEX6: std_logic_vector(6 downto 0);
-    signal OUT_1_HEX5, OUT_2_HEX5: std_logic_vector(6 downto 0);
-    signal OUT_DEC_HEX4, OUT_1_HEX4, OUT_2_HEX4: std_logic_vector(6 downto 0);
-    signal OUT_1_HEX3, OUT_2_HEX3: std_logic_vector(6 downto 0);
-    signal OUT_DEC1_HEX2, OUT_DEC2_HEX2, OUT_DEC3_HEX2, OUT_1_HEX2, OUT_2_HEX2: std_logic_vector(6 downto 0);
-    signal OUT_DEC1_HEX1, OUT_DEC2_HEX1, OUT_DEC3_HEX1, OUT_1_HEX1, OUT_2_HEX1: std_logic_vector(6 downto 0);
-    signal OUT_DEC1_HEX0, OUT_DEC2_HEX0, OUT_DEC3_HEX0, OUT_DEC4_HEX0, OUT_1_HEX0, OUT_2_HEX0: std_logic_vector(6 downto 0);
+    signal OUT_1_HEX7, OUT_2_HEX7: std_logic_vector(6 downto 0); -- saida mux2x1 hex7
+    signal OUT_DEC_HEX6, OUT_1_HEX6, OUT_2_HEX6: std_logic_vector(6 downto 0); -- saida mux2x1 hex6
+    signal OUT_1_HEX5, OUT_2_HEX5: std_logic_vector(6 downto 0); -- saida mux2x1 hex5
+    signal OUT_DEC_HEX4, OUT_1_HEX4, OUT_2_HEX4: std_logic_vector(6 downto 0); -- saida mux2x1 e dec7seg hex4
+    signal OUT_1_HEX3, OUT_2_HEX3: std_logic_vector(6 downto 0); -- saida mux2x1 hex3
+    signal OUT_DEC1_HEX2, OUT_DEC2_HEX2, OUT_DEC3_HEX2, OUT_1_HEX2, OUT_2_HEX2: std_logic_vector(6 downto 0); -- saida mux2x1 e dec7seg hex2
+    signal OUT_DEC1_HEX1, OUT_DEC2_HEX1, OUT_DEC3_HEX1, OUT_1_HEX1, OUT_2_HEX1: std_logic_vector(6 downto 0); -- saida mux2x1 e dec7seg hex1
+    signal OUT_DEC1_HEX0, OUT_DEC2_HEX0, OUT_DEC3_HEX0, OUT_DEC4_HEX0, OUT_1_HEX0, OUT_2_HEX0: std_logic_vector(6 downto 0); -- saida mux2x1 e dec7seg hex0
 
     component regsetup is port (
         IN_REG_SETUP: in std_logic_vector(13 downto 0);
         R: in std_logic;
         E: in std_logic;
         CLK_500Hz: in std_logic;
-        OUT_REG_SETUP: out std_logic_vector(13 downto 0) 
+        OUT_REG_SETUP: out std_logic_vector(13 downto 0)
     );
     end component;
 
@@ -136,17 +136,17 @@ architecture arqdata of datapath is
     end component;
 
 begin
-    -- map port para registrador setup
+    -- port map para registrador setup
     REG_setup: regsetup port map(sw_entra(13 downto 0), r1, e1, clk50, SETUP);
     r1_or_e4 <= r1 or e4;
 
-    -- map port para contador de level
+    -- port map para contador de level
     Counter_level: counterlevel port map(SETUP(9 downto 6), r1_or_e4, e2, clk1, out_end_FPGA);
 
-    -- map port para contador de tempo
+    -- port map para contador de tempo
     Counter_time: countertime port map("1010", r1_or_e4, e3, clk1, out_end_time, TIME_OUT);
 
-    -- map port para contador de rodada
+    -- port map para contador de rodada
     Counter_round: counterround port map("0000", SETUP(3 downto 0), e1, e4, clk50, out_end_round, ROUND_OUT);
 
     dec4binx8bcd: decBCD port map(ROUND_OUT, ROUND_BCD);
@@ -157,21 +157,22 @@ begin
     SEQ_3: SEQ3 port map(ROUND_OUT, SEQ3_OUT);
     SEQ_4: SEQ4 port map(ROUND_OUT, SEQ4_OUT);
 
-    -- map port para escolher qual sequencia
+    -- port map para escolher qual sequencia
     MUX4x1: mux4to1 port map(SEQ1_OUT, SEQ2_OUT, SEQ3_OUT, SEQ4_OUT, SETUP(5 downto 4), SEQ_FPGA);
 
+    -- operacao para encontrar diferencas entre sequencia da FPGA e entrada do usuario
     seq_fpga_xor_sw_entra <= SEQ_FPGA xor sw_entra;
 
-    -- map port para soma de bits entre entrada e sequencia
+    -- port map para soma de bits de erros
     SUM_BIT_BIT: sum port map(seq_fpga_xor_sw_entra, SUM_BIT_BIT_OUT);
 
     e3_and_not_key_entra <= e3 and (not key_entra);
 
-    -- map port para contador de bonus
-    Counter_bonus: counterbonus port map(SUM_BIT_BIT_OUT, SETUP(13 downto 10), e1, e3_and_not_key_entra, clk50, out_end_bonus, BONUS);
+    -- port map para contador de bonus
+    Counter_bonus: counterbonus port map(SUM_BIT_BIT_OUT, SETUP(13 downto 10), e1, e3_and_not_key_entra, clk50, out_end_bonus, BONUS_OUT);
 
-    F_POINTS <= "00" & ROUND_OUT & (not BONUS);
-    U_POINTS <= "00" & (not ROUND_OUT) & BONUS;
+    F_POINTS <= "00" & ROUND_OUT & (not BONUS_OUT);
+    U_POINTS <= "00" & (not ROUND_OUT) & BONUS_OUT;
 
     -- status
     end_time <= out_end_time;
@@ -232,7 +233,7 @@ begin
     mux2x1_7_hex1_3: mux2to1_7b port map(OUT_1_HEX1, OUT_2_HEX1, e6, h1);
 
     -- hex0
-    decod7seg_1_hex_0: dec7seg port map(BONUS(3 downto 0), OUT_DEC1_HEX0);
+    decod7seg_1_hex_0: dec7seg port map(BONUS_OUT(3 downto 0), OUT_DEC1_HEX0);
     decod7seg_2_hex_0: dec7seg port map(ROUND_BCD(3 downto 0), OUT_DEC2_HEX0);
     mux2x1_7_hex0_1: mux2to1_7b port map(OUT_DEC1_HEX0, OUT_DEC2_HEX0, e5, OUT_1_HEX0);
 

@@ -20,7 +20,7 @@ begin
         end if;
 	end process;
 
-    process(reset, enter, end_fpga, end_bonus, end_time, end_round)
+    process(EAtual, enter, end_fpga, end_bonus, end_time, end_round)
 			begin
 				case EAtual is 
                     when start =>
@@ -88,7 +88,7 @@ begin
                     -- avalia em quantas posicoes o usuario errou na replicacao
                     -- mostra displays com L(level), J(jogo), t(tempo), b(bonus)
                     -- leds apagados
-                    -- proximo estado: se end bonus ou end round -> result. se nao -> next_round
+                    -- proximo estado: se end bonus -> result. se end round -> result. se nao -> next_round
                         r1 <= '0';
                         e1 <= '0';
                         e2 <= '0';
@@ -96,7 +96,9 @@ begin
                         e4 <= '0';
                         e5 <= '0';
                         e6 <= '0';
-                        if(end_bonus = '1' or end_round = '1') then
+                        if(end_bonus = '1') then
+                            PEstado <= result;
+                        elsif(end_round = '1') then
                             PEstado <= result;
                         else
                             PEstado <= next_round;
