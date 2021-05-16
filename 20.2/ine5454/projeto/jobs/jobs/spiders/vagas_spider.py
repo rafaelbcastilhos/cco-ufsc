@@ -11,7 +11,7 @@ class VagasSpider(scrapy.Spider):
         'CLOSESPIDER_ITEMCOUNT': 1000
     }
 
-    start_urls = ["https://www.vagas.com.br/vagas-de-frontend"]
+    start_urls = ["https://www.vagas.com.br/vagas-de-devops"]
 
     def parse(self, response):
         """

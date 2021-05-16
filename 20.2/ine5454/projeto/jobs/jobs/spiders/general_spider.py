@@ -6,7 +6,7 @@ from ..regex import *
 
 
 class GeneralSpider(scrapy.Spider):
-    name = "job_hunting_spider"
+    name = "job_hunter_spider"
     allowed_domains = []
 
     custom_settings = {
@@ -46,7 +46,7 @@ class GeneralSpider(scrapy.Spider):
                 item["salary"] is not None):
             yield item
 
-        if response.meta['depth'] < 3:
+        if response.meta['depth'] < 2:
             link_extractor = LinkExtractor()
             for link in link_extractor.extract_links(response):
                 print(f"link: {link.url}")
