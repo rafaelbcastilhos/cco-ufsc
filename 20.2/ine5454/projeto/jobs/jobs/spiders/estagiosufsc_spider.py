@@ -1,6 +1,7 @@
 import scrapy
 from ..items import JobsItem
 from ..regex import *
+from ..named_entity import search_company_name
 
 
 class EstagiosUFSCSpider(scrapy.Spider):
@@ -8,7 +9,7 @@ class EstagiosUFSCSpider(scrapy.Spider):
     allowed_domains = []
 
     custom_settings = {
-        'CLOSESPIDER_ITEMCOUNT': 20
+        'CLOSESPIDER_ITEMCOUNT': 1000
     }
 
     start_urls = ["https://estagios.ufsc.br/index.php?page=search&cursos%5B%5D=208"]
@@ -65,8 +66,7 @@ class EstagiosUFSCSpider(scrapy.Spider):
         else:
             item["description"] = search_description(html)
 
-        item["company_name"] = search_company_name(second_response, item["title"])
-
+        item["company_name"] = search_company_name(html)
         item["hiring_type"] = search_hiring_type(html)
         item["hierarchy"] = search_hierarchy(html)
         item["salary"] = search_salary(html)

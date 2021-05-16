@@ -1,6 +1,7 @@
 import scrapy
 from ..items import JobsItem
 from ..regex import *
+from ..named_entity import search_company_name
 
 
 class CathoSpider(scrapy.Spider):
@@ -9,7 +10,7 @@ class CathoSpider(scrapy.Spider):
     start_urls = ["https://www.catho.com.br/vagas/cientista-de-dados/"]
 
     custom_settings = {
-        'CLOSESPIDER_ITEMCOUNT': 20
+        'CLOSESPIDER_ITEMCOUNT': 1000
     }
 
     def parse(self, response):
@@ -21,7 +22,7 @@ class CathoSpider(scrapy.Spider):
         """
         self.logger.info(f"Scrape Page {response.url}")
 
-        total = response.xpath("//p[@class='sc-cHGsZl jIsXPm']"
+        total = response.xpath("//p[@class='sc-hmzhuo gjVMHy']"
                                "/text()").get()
 
         split = total.split(": ")
@@ -43,7 +44,7 @@ class CathoSpider(scrapy.Spider):
         @returns request to extract links
         @scrapes all jobs links
         """
-        jobs = second_response.xpath("//h2[@class='Title__Heading-sc-14fvmc0-0 fGTSAd sc-gPEVay kyrxFQ']"
+        jobs = second_response.xpath("//h2[@class='Title__Heading-sc-14fvmc0-0 fGTSAd sc-csuQGl cBWsYQ']"
                                      "//a"
                                      "/@href").getall()
 
@@ -59,24 +60,18 @@ class CathoSpider(scrapy.Spider):
         item = JobsItem()
 
         item["title"] = third_response.xpath(
-            "//header[@class='headerSugestaoVaga gtm-class']"
-            "//h1"
-            "/text()").get()
-
-        item["company_name"] = None
-
-        item["salary"] = third_response.xpath(
-            "//div[@class='caracteristicasVaga']"
-            "//div"
-            "//span"
+            "//h2[@class='Title__Heading-sc-14fvmc0-0 fGTSAd sc-csuQGl cBWsYQ']"
+            "//a"
             "/text()").get()
 
         item["description"] = third_response.xpath(
-            "//p[@id='descricaoVagaTexto']"
+            "//span[@class='job-description']"
             "/text()").get()
 
         html = get_html_from_response(third_response)
+        item["company_name"] = search_company_name(html)
         item["hiring_type"] = search_hiring_type(html)
+        item["salary"] = search_salary(html)
         item["hierarchy"] = search_hierarchy(html)
         item["mode"] = search_mode(html)
         item["url"] = third_response.url

@@ -1,5 +1,6 @@
 import scrapy
 from ..items import JobsItem
+from ..named_entity import search_company_name
 from ..regex import *
 
 
@@ -8,7 +9,7 @@ class StackoverflowSpider(scrapy.Spider):
     allowed_domains = []
 
     custom_settings = {
-        'CLOSESPIDER_ITEMCOUNT': 20
+        'CLOSESPIDER_ITEMCOUNT': 1000
     }
 
     start_urls = ["https://stackoverflow.com/jobs?dr=BackendDeveloper"]
