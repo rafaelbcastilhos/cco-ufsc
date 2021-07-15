@@ -10,7 +10,6 @@ class Tipo(Enum):
 
 
 class AbstractPersonagem(ABC):
-
     '''
     @return Retorna o tipo do personagem
     '''

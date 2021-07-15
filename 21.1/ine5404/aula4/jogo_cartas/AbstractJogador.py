@@ -1,9 +1,7 @@
-from abc import ABC, abstractmethod
 from Carta import *
 
 
 class AbstractJogador(ABC):
-
     '''
     Retorna o nome do jogador
     @return nome do jogador

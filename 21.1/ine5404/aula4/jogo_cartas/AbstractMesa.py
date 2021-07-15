@@ -1,10 +1,7 @@
-from abc import ABC, abstractmethod
-from Carta import *
 from Jogador import *
 
 
 class AbstractMesa(ABC):
-
     '''
     Retorna o Jogador 1
     @return o Jogador 1

@@ -2,7 +2,6 @@ from AbstractPersonagem import *
 
 
 class Personagem(AbstractPersonagem):
-    #Construtor fornecido, nao deve ser alterado
     def __init__(self, energia: int, habilidade: int,
                  velocidade: int, resistencia: int, tipo: Tipo):
         self.__energia = energia

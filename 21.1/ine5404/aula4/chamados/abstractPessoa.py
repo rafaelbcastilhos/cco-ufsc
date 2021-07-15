@@ -1,5 +1,6 @@
 from abc import ABC, abstractmethod
 
+
 class AbstractPessoa(ABC):
     @abstractmethod
     def __init__(self):
@@ -8,9 +9,9 @@ class AbstractPessoa(ABC):
     @property
     @abstractmethod
     def codigo(self) -> int:
-    	pass
+        pass
     
     @property
     @abstractmethod
     def nome(self) -> str:
-    	pass
+        pass

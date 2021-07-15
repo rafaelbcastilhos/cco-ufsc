@@ -1,7 +1,7 @@
 from abc import ABC, abstractmethod
 
-class AbstractTipoChamado(ABC):
 
+class AbstractTipoChamado(ABC):
 	@property
 	@abstractmethod
 	def codigo(self) -> int:

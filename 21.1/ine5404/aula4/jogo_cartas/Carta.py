@@ -3,7 +3,6 @@ from Personagem import *
 
 
 class Carta(AbstractCarta):
-
     def __init__(self, personagem: Personagem):
         self.__personagem = personagem
 

@@ -1,7 +1,3 @@
-from abc import ABC, abstractmethod
-from Carta import *
-from Personagem import *
-from Jogador import *
 from Mesa import *
 
 
