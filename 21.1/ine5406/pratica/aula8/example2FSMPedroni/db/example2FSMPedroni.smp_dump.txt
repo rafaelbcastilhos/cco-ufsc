@@ -1,0 +1,7 @@
+
+State Machine - |example2FSMPedroni|currentState
+Name currentState.state4 currentState.state3 currentState.state2 currentState.state1 
+currentState.state1 0 0 0 0 
+currentState.state2 0 0 1 1 
+currentState.state3 0 1 0 1 
+currentState.state4 1 0 0 1 

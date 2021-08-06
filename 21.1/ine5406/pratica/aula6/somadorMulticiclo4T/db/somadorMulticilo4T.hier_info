@@ -1,0 +1,486 @@
+|somadorMulticilo4T
+ck => blocoOperativo4T:BO.clock
+ck => blocoControle4T:BC.clock
+reset => blocoOperativo4T:BO.reset
+reset => blocoControle4T:BC.reset
+iniciar => blocoControle4T:BC.iniciar
+erro <= blocoControle4T:BC.erro
+pronto <= blocoControle4T:BC.pronto
+ent[0] => blocoOperativo4T:BO.ent[0]
+ent[1] => blocoOperativo4T:BO.ent[1]
+ent[2] => blocoOperativo4T:BO.ent[2]
+ent[3] => blocoOperativo4T:BO.ent[3]
+ent[4] => blocoOperativo4T:BO.ent[4]
+ent[5] => blocoOperativo4T:BO.ent[5]
+ent[6] => blocoOperativo4T:BO.ent[6]
+ent[7] => blocoOperativo4T:BO.ent[7]
+n[0] => blocoOperativo4T:BO.n[0]
+n[1] => blocoOperativo4T:BO.n[1]
+n[2] => blocoOperativo4T:BO.n[2]
+n[3] => blocoOperativo4T:BO.n[3]
+soma[0] <= blocoOperativo4T:BO.soma[0]
+soma[1] <= blocoOperativo4T:BO.soma[1]
+soma[2] <= blocoOperativo4T:BO.soma[2]
+soma[3] <= blocoOperativo4T:BO.soma[3]
+soma[4] <= blocoOperativo4T:BO.soma[4]
+soma[5] <= blocoOperativo4T:BO.soma[5]
+soma[6] <= blocoOperativo4T:BO.soma[6]
+soma[7] <= blocoOperativo4T:BO.soma[7]
+stateBC.S0 <= blocoControle4T:BC.stateBC.S0
+stateBC.S1 <= blocoControle4T:BC.stateBC.S1
+stateBC.S2 <= blocoControle4T:BC.stateBC.S2
+stateBC.S3 <= blocoControle4T:BC.stateBC.S3
+stateBC.E <= blocoControle4T:BC.stateBC.E
+
+
+|somadorMulticilo4T|blocoOperativo4T:BO
+clock => registerN:cont.clock
+clock => registerN:AC.clock
+clock => registerN:T.clock
+reset => registerN:cont.reset
+reset => registerN:AC.reset
+reset => registerN:T.reset
+scont => multiplexer2x1:mux0.sel
+ccont => registerN:cont.load
+zAC => multiplexer2x1:mux1.sel
+cAC => registerN:AC.load
+cT => registerN:T.load
+zero <= compare:compare0.equal
+ov <= addersubtractor:adder0.cout
+ent[0] => registerN:T.input[0]
+ent[1] => registerN:T.input[1]
+ent[2] => registerN:T.input[2]
+ent[3] => registerN:T.input[3]
+ent[4] => registerN:T.input[4]
+ent[5] => registerN:T.input[5]
+ent[6] => registerN:T.input[6]
+ent[7] => registerN:T.input[7]
+n[0] => multiplexer2x1:mux0.input1[0]
+n[1] => multiplexer2x1:mux0.input1[1]
+n[2] => multiplexer2x1:mux0.input1[2]
+n[3] => multiplexer2x1:mux0.input1[3]
+soma[0] <= registerN:AC.output[0]
+soma[1] <= registerN:AC.output[1]
+soma[2] <= registerN:AC.output[2]
+soma[3] <= registerN:AC.output[3]
+soma[4] <= registerN:AC.output[4]
+soma[5] <= registerN:AC.output[5]
+soma[6] <= registerN:AC.output[6]
+soma[7] <= registerN:AC.output[7]
+
+
+|somadorMulticilo4T|blocoOperativo4T:BO|multiplexer2x1:mux0
+input0[0] => output.DATAB
+input0[1] => output.DATAB
+input0[2] => output.DATAB
+input0[3] => output.DATAB
+input1[0] => output.DATAA
+input1[1] => output.DATAA
+input1[2] => output.DATAA
+input1[3] => output.DATAA
+sel => output.OUTPUTSELECT
+sel => output.OUTPUTSELECT
+sel => output.OUTPUTSELECT
+sel => output.OUTPUTSELECT
+output[0] <= output.DB_MAX_OUTPUT_PORT_TYPE
+output[1] <= output.DB_MAX_OUTPUT_PORT_TYPE
+output[2] <= output.DB_MAX_OUTPUT_PORT_TYPE
+output[3] <= output.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|somadorMulticilo4T|blocoOperativo4T:BO|registerN:cont
+clock => currentState[0].CLK
+clock => currentState[1].CLK
+clock => currentState[2].CLK
+clock => currentState[3].CLK
+reset => currentState[0].ACLR
+reset => currentState[1].ACLR
+reset => currentState[2].ACLR
+reset => currentState[3].ACLR
+load => currentState[3].ENA
+load => currentState[2].ENA
+load => currentState[1].ENA
+load => currentState[0].ENA
+input[0] => currentState[0].DATAIN
+input[1] => currentState[1].DATAIN
+input[2] => currentState[2].DATAIN
+input[3] => currentState[3].DATAIN
+output[0] <= currentState[0].DB_MAX_OUTPUT_PORT_TYPE
+output[1] <= currentState[1].DB_MAX_OUTPUT_PORT_TYPE
+output[2] <= currentState[2].DB_MAX_OUTPUT_PORT_TYPE
+output[3] <= currentState[3].DB_MAX_OUTPUT_PORT_TYPE
+
+
+|somadorMulticilo4T|blocoOperativo4T:BO|addersubtractor:subtractor0
+op => ~NO_FANOUT~
+a[0] => fulladder1bit:gera:0:fa.a
+a[1] => fulladder1bit:gera:1:fa.a
+a[2] => fulladder1bit:gera:2:fa.a
+a[3] => fulladder1bit:gera:3:fa.a
+b[0] => fulladder1bit:gera:0:fa.b
+b[1] => fulladder1bit:gera:1:fa.b
+b[2] => fulladder1bit:gera:2:fa.b
+b[3] => fulladder1bit:gera:3:fa.b
+result[0] <= fulladder1bit:gera:0:fa.sum
+result[1] <= fulladder1bit:gera:1:fa.sum
+result[2] <= fulladder1bit:gera:2:fa.sum
+result[3] <= fulladder1bit:gera:3:fa.sum
+ovf <= <GND>
+cout <= fulladder1bit:gera:3:fa.cout
+
+
+|somadorMulticilo4T|blocoOperativo4T:BO|addersubtractor:subtractor0|fulladder1bit:\gera:3:fa
+cin => sum.IN0
+cin => cout.IN0
+cin => cout.IN0
+a => sum.IN1
+a => cout.IN1
+a => cout.IN0
+b => sum.IN1
+b => cout.IN1
+b => cout.IN1
+sum <= sum.DB_MAX_OUTPUT_PORT_TYPE
+cout <= cout.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|somadorMulticilo4T|blocoOperativo4T:BO|addersubtractor:subtractor0|fulladder1bit:\gera:2:fa
+cin => sum.IN0
+cin => cout.IN0
+cin => cout.IN0
+a => sum.IN1
+a => cout.IN1
+a => cout.IN0
+b => sum.IN1
+b => cout.IN1
+b => cout.IN1
+sum <= sum.DB_MAX_OUTPUT_PORT_TYPE
+cout <= cout.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|somadorMulticilo4T|blocoOperativo4T:BO|addersubtractor:subtractor0|fulladder1bit:\gera:1:fa
+cin => sum.IN0
+cin => cout.IN0
+cin => cout.IN0
+a => sum.IN1
+a => cout.IN1
+a => cout.IN0
+b => sum.IN1
+b => cout.IN1
+b => cout.IN1
+sum <= sum.DB_MAX_OUTPUT_PORT_TYPE
+cout <= cout.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|somadorMulticilo4T|blocoOperativo4T:BO|addersubtractor:subtractor0|fulladder1bit:\gera:0:fa
+cin => sum.IN0
+cin => cout.IN0
+cin => cout.IN0
+a => sum.IN1
+a => cout.IN1
+a => cout.IN0
+b => sum.IN1
+b => cout.IN1
+b => cout.IN1
+sum <= sum.DB_MAX_OUTPUT_PORT_TYPE
+cout <= cout.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|somadorMulticilo4T|blocoOperativo4T:BO|compare:compare0
+input0[0] => Equal0.IN3
+input0[1] => Equal0.IN2
+input0[2] => Equal0.IN1
+input0[3] => Equal0.IN0
+input1[0] => Equal0.IN7
+input1[1] => Equal0.IN6
+input1[2] => Equal0.IN5
+input1[3] => Equal0.IN4
+lessThan <= <GND>
+equal <= Equal0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|somadorMulticilo4T|blocoOperativo4T:BO|multiplexer2x1:mux1
+input0[0] => output.DATAB
+input0[1] => output.DATAB
+input0[2] => output.DATAB
+input0[3] => output.DATAB
+input0[4] => output.DATAB
+input0[5] => output.DATAB
+input0[6] => output.DATAB
+input0[7] => output.DATAB
+input1[0] => output.DATAA
+input1[1] => output.DATAA
+input1[2] => output.DATAA
+input1[3] => output.DATAA
+input1[4] => output.DATAA
+input1[5] => output.DATAA
+input1[6] => output.DATAA
+input1[7] => output.DATAA
+sel => output.OUTPUTSELECT
+sel => output.OUTPUTSELECT
+sel => output.OUTPUTSELECT
+sel => output.OUTPUTSELECT
+sel => output.OUTPUTSELECT
+sel => output.OUTPUTSELECT
+sel => output.OUTPUTSELECT
+sel => output.OUTPUTSELECT
+output[0] <= output.DB_MAX_OUTPUT_PORT_TYPE
+output[1] <= output.DB_MAX_OUTPUT_PORT_TYPE
+output[2] <= output.DB_MAX_OUTPUT_PORT_TYPE
+output[3] <= output.DB_MAX_OUTPUT_PORT_TYPE
+output[4] <= output.DB_MAX_OUTPUT_PORT_TYPE
+output[5] <= output.DB_MAX_OUTPUT_PORT_TYPE
+output[6] <= output.DB_MAX_OUTPUT_PORT_TYPE
+output[7] <= output.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|somadorMulticilo4T|blocoOperativo4T:BO|registerN:AC
+clock => currentState[0].CLK
+clock => currentState[1].CLK
+clock => currentState[2].CLK
+clock => currentState[3].CLK
+clock => currentState[4].CLK
+clock => currentState[5].CLK
+clock => currentState[6].CLK
+clock => currentState[7].CLK
+reset => currentState[0].ACLR
+reset => currentState[1].ACLR
+reset => currentState[2].ACLR
+reset => currentState[3].ACLR
+reset => currentState[4].ACLR
+reset => currentState[5].ACLR
+reset => currentState[6].ACLR
+reset => currentState[7].ACLR
+load => currentState[7].ENA
+load => currentState[6].ENA
+load => currentState[5].ENA
+load => currentState[4].ENA
+load => currentState[3].ENA
+load => currentState[2].ENA
+load => currentState[1].ENA
+load => currentState[0].ENA
+input[0] => currentState[0].DATAIN
+input[1] => currentState[1].DATAIN
+input[2] => currentState[2].DATAIN
+input[3] => currentState[3].DATAIN
+input[4] => currentState[4].DATAIN
+input[5] => currentState[5].DATAIN
+input[6] => currentState[6].DATAIN
+input[7] => currentState[7].DATAIN
+output[0] <= currentState[0].DB_MAX_OUTPUT_PORT_TYPE
+output[1] <= currentState[1].DB_MAX_OUTPUT_PORT_TYPE
+output[2] <= currentState[2].DB_MAX_OUTPUT_PORT_TYPE
+output[3] <= currentState[3].DB_MAX_OUTPUT_PORT_TYPE
+output[4] <= currentState[4].DB_MAX_OUTPUT_PORT_TYPE
+output[5] <= currentState[5].DB_MAX_OUTPUT_PORT_TYPE
+output[6] <= currentState[6].DB_MAX_OUTPUT_PORT_TYPE
+output[7] <= currentState[7].DB_MAX_OUTPUT_PORT_TYPE
+
+
+|somadorMulticilo4T|blocoOperativo4T:BO|registerN:T
+clock => currentState[0].CLK
+clock => currentState[1].CLK
+clock => currentState[2].CLK
+clock => currentState[3].CLK
+clock => currentState[4].CLK
+clock => currentState[5].CLK
+clock => currentState[6].CLK
+clock => currentState[7].CLK
+reset => currentState[0].ACLR
+reset => currentState[1].ACLR
+reset => currentState[2].ACLR
+reset => currentState[3].ACLR
+reset => currentState[4].ACLR
+reset => currentState[5].ACLR
+reset => currentState[6].ACLR
+reset => currentState[7].ACLR
+load => currentState[7].ENA
+load => currentState[6].ENA
+load => currentState[5].ENA
+load => currentState[4].ENA
+load => currentState[3].ENA
+load => currentState[2].ENA
+load => currentState[1].ENA
+load => currentState[0].ENA
+input[0] => currentState[0].DATAIN
+input[1] => currentState[1].DATAIN
+input[2] => currentState[2].DATAIN
+input[3] => currentState[3].DATAIN
+input[4] => currentState[4].DATAIN
+input[5] => currentState[5].DATAIN
+input[6] => currentState[6].DATAIN
+input[7] => currentState[7].DATAIN
+output[0] <= currentState[0].DB_MAX_OUTPUT_PORT_TYPE
+output[1] <= currentState[1].DB_MAX_OUTPUT_PORT_TYPE
+output[2] <= currentState[2].DB_MAX_OUTPUT_PORT_TYPE
+output[3] <= currentState[3].DB_MAX_OUTPUT_PORT_TYPE
+output[4] <= currentState[4].DB_MAX_OUTPUT_PORT_TYPE
+output[5] <= currentState[5].DB_MAX_OUTPUT_PORT_TYPE
+output[6] <= currentState[6].DB_MAX_OUTPUT_PORT_TYPE
+output[7] <= currentState[7].DB_MAX_OUTPUT_PORT_TYPE
+
+
+|somadorMulticilo4T|blocoOperativo4T:BO|addersubtractor:adder0
+op => ~NO_FANOUT~
+a[0] => fulladder1bit:gera:0:fa.a
+a[1] => fulladder1bit:gera:1:fa.a
+a[2] => fulladder1bit:gera:2:fa.a
+a[3] => fulladder1bit:gera:3:fa.a
+a[4] => fulladder1bit:gera:4:fa.a
+a[5] => fulladder1bit:gera:5:fa.a
+a[6] => fulladder1bit:gera:6:fa.a
+a[7] => fulladder1bit:gera:7:fa.a
+b[0] => fulladder1bit:gera:0:fa.b
+b[1] => fulladder1bit:gera:1:fa.b
+b[2] => fulladder1bit:gera:2:fa.b
+b[3] => fulladder1bit:gera:3:fa.b
+b[4] => fulladder1bit:gera:4:fa.b
+b[5] => fulladder1bit:gera:5:fa.b
+b[6] => fulladder1bit:gera:6:fa.b
+b[7] => fulladder1bit:gera:7:fa.b
+result[0] <= fulladder1bit:gera:0:fa.sum
+result[1] <= fulladder1bit:gera:1:fa.sum
+result[2] <= fulladder1bit:gera:2:fa.sum
+result[3] <= fulladder1bit:gera:3:fa.sum
+result[4] <= fulladder1bit:gera:4:fa.sum
+result[5] <= fulladder1bit:gera:5:fa.sum
+result[6] <= fulladder1bit:gera:6:fa.sum
+result[7] <= fulladder1bit:gera:7:fa.sum
+ovf <= ovf.DB_MAX_OUTPUT_PORT_TYPE
+cout <= fulladder1bit:gera:7:fa.cout
+
+
+|somadorMulticilo4T|blocoOperativo4T:BO|addersubtractor:adder0|fulladder1bit:\gera:7:fa
+cin => sum.IN0
+cin => cout.IN0
+cin => cout.IN0
+a => sum.IN1
+a => cout.IN1
+a => cout.IN0
+b => sum.IN1
+b => cout.IN1
+b => cout.IN1
+sum <= sum.DB_MAX_OUTPUT_PORT_TYPE
+cout <= cout.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|somadorMulticilo4T|blocoOperativo4T:BO|addersubtractor:adder0|fulladder1bit:\gera:6:fa
+cin => sum.IN0
+cin => cout.IN0
+cin => cout.IN0
+a => sum.IN1
+a => cout.IN1
+a => cout.IN0
+b => sum.IN1
+b => cout.IN1
+b => cout.IN1
+sum <= sum.DB_MAX_OUTPUT_PORT_TYPE
+cout <= cout.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|somadorMulticilo4T|blocoOperativo4T:BO|addersubtractor:adder0|fulladder1bit:\gera:5:fa
+cin => sum.IN0
+cin => cout.IN0
+cin => cout.IN0
+a => sum.IN1
+a => cout.IN1
+a => cout.IN0
+b => sum.IN1
+b => cout.IN1
+b => cout.IN1
+sum <= sum.DB_MAX_OUTPUT_PORT_TYPE
+cout <= cout.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|somadorMulticilo4T|blocoOperativo4T:BO|addersubtractor:adder0|fulladder1bit:\gera:4:fa
+cin => sum.IN0
+cin => cout.IN0
+cin => cout.IN0
+a => sum.IN1
+a => cout.IN1
+a => cout.IN0
+b => sum.IN1
+b => cout.IN1
+b => cout.IN1
+sum <= sum.DB_MAX_OUTPUT_PORT_TYPE
+cout <= cout.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|somadorMulticilo4T|blocoOperativo4T:BO|addersubtractor:adder0|fulladder1bit:\gera:3:fa
+cin => sum.IN0
+cin => cout.IN0
+cin => cout.IN0
+a => sum.IN1
+a => cout.IN1
+a => cout.IN0
+b => sum.IN1
+b => cout.IN1
+b => cout.IN1
+sum <= sum.DB_MAX_OUTPUT_PORT_TYPE
+cout <= cout.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|somadorMulticilo4T|blocoOperativo4T:BO|addersubtractor:adder0|fulladder1bit:\gera:2:fa
+cin => sum.IN0
+cin => cout.IN0
+cin => cout.IN0
+a => sum.IN1
+a => cout.IN1
+a => cout.IN0
+b => sum.IN1
+b => cout.IN1
+b => cout.IN1
+sum <= sum.DB_MAX_OUTPUT_PORT_TYPE
+cout <= cout.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|somadorMulticilo4T|blocoOperativo4T:BO|addersubtractor:adder0|fulladder1bit:\gera:1:fa
+cin => sum.IN0
+cin => cout.IN0
+cin => cout.IN0
+a => sum.IN1
+a => cout.IN1
+a => cout.IN0
+b => sum.IN1
+b => cout.IN1
+b => cout.IN1
+sum <= sum.DB_MAX_OUTPUT_PORT_TYPE
+cout <= cout.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|somadorMulticilo4T|blocoOperativo4T:BO|addersubtractor:adder0|fulladder1bit:\gera:0:fa
+cin => sum.IN0
+cin => cout.IN0
+cin => cout.IN0
+a => sum.IN1
+a => cout.IN1
+a => cout.IN0
+b => sum.IN1
+b => cout.IN1
+b => cout.IN1
+sum <= sum.DB_MAX_OUTPUT_PORT_TYPE
+cout <= cout.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|somadorMulticilo4T|blocoControle4T:BC
+clock => currentState~1.DATAIN
+reset => currentState~3.DATAIN
+iniciar => nextState.IN1
+iniciar => nextState.IN0
+zero => nextState.IN0
+zero => nextState.IN0
+ov => nextState.IN0
+ov => nextState.IN0
+erro <= erro.DB_MAX_OUTPUT_PORT_TYPE
+pronto <= pronto.DB_MAX_OUTPUT_PORT_TYPE
+scont <= scont.DB_MAX_OUTPUT_PORT_TYPE
+ccont <= ccont.DB_MAX_OUTPUT_PORT_TYPE
+zAC <= zAC.DB_MAX_OUTPUT_PORT_TYPE
+cAC <= cAC.DB_MAX_OUTPUT_PORT_TYPE
+cT <= cT.DB_MAX_OUTPUT_PORT_TYPE
+stateBC.S0 <= stateBC.S0.DB_MAX_OUTPUT_PORT_TYPE
+stateBC.S1 <= stateBC.S1.DB_MAX_OUTPUT_PORT_TYPE
+stateBC.S2 <= stateBC.S2.DB_MAX_OUTPUT_PORT_TYPE
+stateBC.S3 <= stateBC.S3.DB_MAX_OUTPUT_PORT_TYPE
+stateBC.E <= stateBC.E.DB_MAX_OUTPUT_PORT_TYPE
+
+

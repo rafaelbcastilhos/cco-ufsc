@@ -1,0 +1,581 @@
+Analysis & Synthesis report for somadorMulticilo4T
+Wed Jul 28 18:35:20 2021
+Quartus Prime Version 20.1.1 Build 720 11/11/2020 SJ Lite Edition
+
+
+---------------------
+; Table of Contents ;
+---------------------
+  1. Legal Notice
+  2. Analysis & Synthesis Summary
+  3. Analysis & Synthesis Settings
+  4. Parallel Compilation
+  5. Analysis & Synthesis Source Files Read
+  6. Analysis & Synthesis Resource Usage Summary
+  7. Analysis & Synthesis Resource Utilization by Entity
+  8. State Machine - |somadorMulticilo4T|blocoControle4T:BC|currentState
+  9. User-Specified and Inferred Latches
+ 10. General Register Statistics
+ 11. Multiplexer Restructuring Statistics (Restructuring Performed)
+ 12. Parameter Settings for User Entity Instance: Top-level Entity: |somadorMulticilo4T
+ 13. Parameter Settings for User Entity Instance: blocoOperativo4T:BO
+ 14. Parameter Settings for User Entity Instance: blocoOperativo4T:BO|multiplexer2x1:mux0
+ 15. Parameter Settings for User Entity Instance: blocoOperativo4T:BO|registerN:cont
+ 16. Parameter Settings for User Entity Instance: blocoOperativo4T:BO|addersubtractor:subtractor0
+ 17. Parameter Settings for User Entity Instance: blocoOperativo4T:BO|compare:compare0
+ 18. Parameter Settings for User Entity Instance: blocoOperativo4T:BO|multiplexer2x1:mux1
+ 19. Parameter Settings for User Entity Instance: blocoOperativo4T:BO|registerN:AC
+ 20. Parameter Settings for User Entity Instance: blocoOperativo4T:BO|registerN:T
+ 21. Parameter Settings for User Entity Instance: blocoOperativo4T:BO|addersubtractor:adder0
+ 22. Port Connectivity Checks: "blocoOperativo4T:BO|addersubtractor:adder0|fulladder1bit:\gera:0:fa"
+ 23. Port Connectivity Checks: "blocoOperativo4T:BO|addersubtractor:adder0"
+ 24. Port Connectivity Checks: "blocoOperativo4T:BO|multiplexer2x1:mux1"
+ 25. Port Connectivity Checks: "blocoOperativo4T:BO|compare:compare0"
+ 26. Port Connectivity Checks: "blocoOperativo4T:BO|addersubtractor:subtractor0|fulladder1bit:\gera:0:fa"
+ 27. Port Connectivity Checks: "blocoOperativo4T:BO|addersubtractor:subtractor0"
+ 28. Post-Synthesis Netlist Statistics for Top Partition
+ 29. Elapsed Time Per Partition
+ 30. Analysis & Synthesis Messages
+
+
+
+----------------
+; Legal Notice ;
+----------------
+Copyright (C) 2020  Intel Corporation. All rights reserved.
+Your use of Intel Corporation's design tools, logic functions 
+and other software and tools, and any partner logic 
+functions, and any output files from any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Intel Program License 
+Subscription Agreement, the Intel Quartus Prime License Agreement,
+the Intel FPGA IP License Agreement, or other applicable license
+agreement, including, without limitation, that your use is for
+the sole purpose of programming logic devices manufactured by
+Intel and sold by Intel or its authorized distributors.  Please
+refer to the applicable agreement for further details, at
+https://fpgasoftware.intel.com/eula.
+
+
+
++----------------------------------------------------------------------------------+
+; Analysis & Synthesis Summary                                                     ;
++------------------------------------+---------------------------------------------+
+; Analysis & Synthesis Status        ; Successful - Wed Jul 28 18:35:20 2021       ;
+; Quartus Prime Version              ; 20.1.1 Build 720 11/11/2020 SJ Lite Edition ;
+; Revision Name                      ; somadorMulticilo4T                          ;
+; Top-level Entity Name              ; somadorMulticilo4T                          ;
+; Family                             ; Cyclone IV E                                ;
+; Total logic elements               ; 59                                          ;
+;     Total combinational functions  ; 51                                          ;
+;     Dedicated logic registers      ; 25                                          ;
+; Total registers                    ; 25                                          ;
+; Total pins                         ; 30                                          ;
+; Total virtual pins                 ; 0                                           ;
+; Total memory bits                  ; 0                                           ;
+; Embedded Multiplier 9-bit elements ; 0                                           ;
+; Total PLLs                         ; 0                                           ;
++------------------------------------+---------------------------------------------+
+
+
++------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Settings                                                                              ;
++------------------------------------------------------------------+--------------------+--------------------+
+; Option                                                           ; Setting            ; Default Value      ;
++------------------------------------------------------------------+--------------------+--------------------+
+; Top-level entity name                                            ; somadorMulticilo4T ; somadorMulticilo4T ;
+; Family name                                                      ; Cyclone IV E       ; Cyclone V          ;
+; Use smart compilation                                            ; Off                ; Off                ;
+; Enable parallel Assembler and Timing Analyzer during compilation ; On                 ; On                 ;
+; Enable compact report table                                      ; Off                ; Off                ;
+; Restructure Multiplexers                                         ; Auto               ; Auto               ;
+; Create Debugging Nodes for IP Cores                              ; Off                ; Off                ;
+; Preserve fewer node names                                        ; On                 ; On                 ;
+; Intel FPGA IP Evaluation Mode                                    ; Enable             ; Enable             ;
+; Verilog Version                                                  ; Verilog_2001       ; Verilog_2001       ;
+; VHDL Version                                                     ; VHDL_1993          ; VHDL_1993          ;
+; State Machine Processing                                         ; Auto               ; Auto               ;
+; Safe State Machine                                               ; Off                ; Off                ;
+; Extract Verilog State Machines                                   ; On                 ; On                 ;
+; Extract VHDL State Machines                                      ; On                 ; On                 ;
+; Ignore Verilog initial constructs                                ; Off                ; Off                ;
+; Iteration limit for constant Verilog loops                       ; 5000               ; 5000               ;
+; Iteration limit for non-constant Verilog loops                   ; 250                ; 250                ;
+; Add Pass-Through Logic to Inferred RAMs                          ; On                 ; On                 ;
+; Infer RAMs from Raw Logic                                        ; On                 ; On                 ;
+; Parallel Synthesis                                               ; On                 ; On                 ;
+; DSP Block Balancing                                              ; Auto               ; Auto               ;
+; NOT Gate Push-Back                                               ; On                 ; On                 ;
+; Power-Up Don't Care                                              ; On                 ; On                 ;
+; Remove Redundant Logic Cells                                     ; Off                ; Off                ;
+; Remove Duplicate Registers                                       ; On                 ; On                 ;
+; Ignore CARRY Buffers                                             ; Off                ; Off                ;
+; Ignore CASCADE Buffers                                           ; Off                ; Off                ;
+; Ignore GLOBAL Buffers                                            ; Off                ; Off                ;
+; Ignore ROW GLOBAL Buffers                                        ; Off                ; Off                ;
+; Ignore LCELL Buffers                                             ; Off                ; Off                ;
+; Ignore SOFT Buffers                                              ; On                 ; On                 ;
+; Limit AHDL Integers to 32 Bits                                   ; Off                ; Off                ;
+; Optimization Technique                                           ; Balanced           ; Balanced           ;
+; Carry Chain Length                                               ; 70                 ; 70                 ;
+; Auto Carry Chains                                                ; On                 ; On                 ;
+; Auto Open-Drain Pins                                             ; On                 ; On                 ;
+; Perform WYSIWYG Primitive Resynthesis                            ; Off                ; Off                ;
+; Auto ROM Replacement                                             ; On                 ; On                 ;
+; Auto RAM Replacement                                             ; On                 ; On                 ;
+; Auto DSP Block Replacement                                       ; On                 ; On                 ;
+; Auto Shift Register Replacement                                  ; Auto               ; Auto               ;
+; Allow Shift Register Merging across Hierarchies                  ; Auto               ; Auto               ;
+; Auto Clock Enable Replacement                                    ; On                 ; On                 ;
+; Strict RAM Replacement                                           ; Off                ; Off                ;
+; Allow Synchronous Control Signals                                ; On                 ; On                 ;
+; Force Use of Synchronous Clear Signals                           ; Off                ; Off                ;
+; Auto RAM Block Balancing                                         ; On                 ; On                 ;
+; Auto RAM to Logic Cell Conversion                                ; Off                ; Off                ;
+; Auto Resource Sharing                                            ; Off                ; Off                ;
+; Allow Any RAM Size For Recognition                               ; Off                ; Off                ;
+; Allow Any ROM Size For Recognition                               ; Off                ; Off                ;
+; Allow Any Shift Register Size For Recognition                    ; Off                ; Off                ;
+; Use LogicLock Constraints during Resource Balancing              ; On                 ; On                 ;
+; Ignore translate_off and synthesis_off directives                ; Off                ; Off                ;
+; Timing-Driven Synthesis                                          ; On                 ; On                 ;
+; Report Parameter Settings                                        ; On                 ; On                 ;
+; Report Source Assignments                                        ; On                 ; On                 ;
+; Report Connectivity Checks                                       ; On                 ; On                 ;
+; Ignore Maximum Fan-Out Assignments                               ; Off                ; Off                ;
+; Synchronization Register Chain Length                            ; 2                  ; 2                  ;
+; Power Optimization During Synthesis                              ; Normal compilation ; Normal compilation ;
+; HDL message level                                                ; Level2             ; Level2             ;
+; Suppress Register Optimization Related Messages                  ; Off                ; Off                ;
+; Number of Removed Registers Reported in Synthesis Report         ; 5000               ; 5000               ;
+; Number of Swept Nodes Reported in Synthesis Report               ; 5000               ; 5000               ;
+; Number of Inverted Registers Reported in Synthesis Report        ; 100                ; 100                ;
+; Clock MUX Protection                                             ; On                 ; On                 ;
+; Auto Gated Clock Conversion                                      ; Off                ; Off                ;
+; Block Design Naming                                              ; Auto               ; Auto               ;
+; SDC constraint protection                                        ; Off                ; Off                ;
+; Synthesis Effort                                                 ; Auto               ; Auto               ;
+; Shift Register Replacement - Allow Asynchronous Clear Signal     ; On                 ; On                 ;
+; Pre-Mapping Resynthesis Optimization                             ; Off                ; Off                ;
+; Analysis & Synthesis Message Level                               ; Medium             ; Medium             ;
+; Disable Register Merging Across Hierarchies                      ; Auto               ; Auto               ;
+; Resource Aware Inference For Block RAM                           ; On                 ; On                 ;
++------------------------------------------------------------------+--------------------+--------------------+
+
+
++------------------------------------------+
+; Parallel Compilation                     ;
++----------------------------+-------------+
+; Processors                 ; Number      ;
++----------------------------+-------------+
+; Number detected on machine ; 8           ;
+; Maximum allowed            ; 4           ;
+;                            ;             ;
+; Average used               ; 1.00        ;
+; Maximum used               ; 4           ;
+;                            ;             ;
+; Usage by Processor         ; % Time Used ;
+;     Processor 1            ; 100.0%      ;
+;     Processor 2            ;   0.0%      ;
+;     Processors 3-4         ;   0.0%      ;
++----------------------------+-------------+
+
+
++------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Source Files Read                                                                                                                     ;
++----------------------------------+-----------------+-----------------------+---------------------------------------------------------------------+---------+
+; File Name with User-Entered Path ; Used in Netlist ; File Type             ; File Name with Absolute Path                                        ; Library ;
++----------------------------------+-----------------+-----------------------+---------------------------------------------------------------------+---------+
+; multiplexer2x1.vhd               ; yes             ; User VHDL File        ; /home/rafael/Documents/qt/somadorMulticilo4T/multiplexer2x1.vhd     ;         ;
+; registerN.vhd                    ; yes             ; User VHDL File        ; /home/rafael/Documents/qt/somadorMulticilo4T/registerN.vhd          ;         ;
+; fulladder1bit.vhd                ; yes             ; User VHDL File        ; /home/rafael/Documents/qt/somadorMulticilo4T/fulladder1bit.vhd      ;         ;
+; compare.vhd                      ; yes             ; User VHDL File        ; /home/rafael/Documents/qt/somadorMulticilo4T/compare.vhd            ;         ;
+; blocoOperativo4T.vhd             ; yes             ; User VHDL File        ; /home/rafael/Documents/qt/somadorMulticilo4T/blocoOperativo4T.vhd   ;         ;
+; blocoControle4T.vhd              ; yes             ; User VHDL File        ; /home/rafael/Documents/qt/somadorMulticilo4T/blocoControle4T.vhd    ;         ;
+; BC_State.vhd                     ; yes             ; User VHDL File        ; /home/rafael/Documents/qt/somadorMulticilo4T/BC_State.vhd           ;         ;
+; addersubtractor.vhd              ; yes             ; User VHDL File        ; /home/rafael/Documents/qt/somadorMulticilo4T/addersubtractor.vhd    ;         ;
+; somadorMulticilo4T.vhd           ; yes             ; Auto-Found VHDL File  ; /home/rafael/Documents/qt/somadorMulticilo4T/somadorMulticilo4T.vhd ;         ;
++----------------------------------+-----------------+-----------------------+---------------------------------------------------------------------+---------+
+
+
++--------------------------------------------------------+
+; Analysis & Synthesis Resource Usage Summary            ;
++---------------------------------------------+----------+
+; Resource                                    ; Usage    ;
++---------------------------------------------+----------+
+; Estimated Total logic elements              ; 59       ;
+;                                             ;          ;
+; Total combinational functions               ; 51       ;
+; Logic element usage by number of LUT inputs ;          ;
+;     -- 4 input functions                    ; 23       ;
+;     -- 3 input functions                    ; 17       ;
+;     -- <=2 input functions                  ; 11       ;
+;                                             ;          ;
+; Logic elements by mode                      ;          ;
+;     -- normal mode                          ; 51       ;
+;     -- arithmetic mode                      ; 0        ;
+;                                             ;          ;
+; Total registers                             ; 25       ;
+;     -- Dedicated logic registers            ; 25       ;
+;     -- I/O registers                        ; 0        ;
+;                                             ;          ;
+; I/O pins                                    ; 30       ;
+;                                             ;          ;
+; Embedded Multiplier 9-bit elements          ; 0        ;
+;                                             ;          ;
+; Maximum fan-out node                        ; ck~input ;
+; Maximum fan-out                             ; 25       ;
+; Total fan-out                               ; 304      ;
+; Average fan-out                             ; 2.24     ;
++---------------------------------------------+----------+
+
+
++----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Resource Utilization by Entity                                                                                                                                                                                                                                          ;
++-------------------------------------+---------------------+---------------------------+-------------+--------------+---------+-----------+------+--------------+-----------------------------------------------------------------------------------------+--------------------+--------------+
+; Compilation Hierarchy Node          ; Combinational ALUTs ; Dedicated Logic Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name                                                                     ; Entity Name        ; Library Name ;
++-------------------------------------+---------------------+---------------------------+-------------+--------------+---------+-----------+------+--------------+-----------------------------------------------------------------------------------------+--------------------+--------------+
+; |somadorMulticilo4T                 ; 51 (0)              ; 25 (0)                    ; 0           ; 0            ; 0       ; 0         ; 30   ; 0            ; |somadorMulticilo4T                                                                     ; somadorMulticilo4T ; work         ;
+;    |blocoControle4T:BC|             ; 25 (25)             ; 5 (5)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |somadorMulticilo4T|blocoControle4T:BC                                                  ; blocoControle4T    ; work         ;
+;    |blocoOperativo4T:BO|            ; 26 (0)              ; 20 (0)                    ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |somadorMulticilo4T|blocoOperativo4T:BO                                                 ; blocoOperativo4T   ; work         ;
+;       |addersubtractor:adder0|      ; 13 (0)              ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |somadorMulticilo4T|blocoOperativo4T:BO|addersubtractor:adder0                          ; addersubtractor    ; work         ;
+;          |fulladder1bit:\gera:1:fa| ; 2 (2)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |somadorMulticilo4T|blocoOperativo4T:BO|addersubtractor:adder0|fulladder1bit:\gera:1:fa ; fulladder1bit      ; work         ;
+;          |fulladder1bit:\gera:2:fa| ; 2 (2)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |somadorMulticilo4T|blocoOperativo4T:BO|addersubtractor:adder0|fulladder1bit:\gera:2:fa ; fulladder1bit      ; work         ;
+;          |fulladder1bit:\gera:3:fa| ; 2 (2)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |somadorMulticilo4T|blocoOperativo4T:BO|addersubtractor:adder0|fulladder1bit:\gera:3:fa ; fulladder1bit      ; work         ;
+;          |fulladder1bit:\gera:5:fa| ; 4 (4)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |somadorMulticilo4T|blocoOperativo4T:BO|addersubtractor:adder0|fulladder1bit:\gera:5:fa ; fulladder1bit      ; work         ;
+;          |fulladder1bit:\gera:7:fa| ; 3 (3)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |somadorMulticilo4T|blocoOperativo4T:BO|addersubtractor:adder0|fulladder1bit:\gera:7:fa ; fulladder1bit      ; work         ;
+;       |multiplexer2x1:mux0|         ; 5 (5)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |somadorMulticilo4T|blocoOperativo4T:BO|multiplexer2x1:mux0                             ; multiplexer2x1     ; work         ;
+;       |multiplexer2x1:mux1|         ; 8 (8)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |somadorMulticilo4T|blocoOperativo4T:BO|multiplexer2x1:mux1                             ; multiplexer2x1     ; work         ;
+;       |registerN:AC|                ; 0 (0)               ; 8 (8)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |somadorMulticilo4T|blocoOperativo4T:BO|registerN:AC                                    ; registerN          ; work         ;
+;       |registerN:T|                 ; 0 (0)               ; 8 (8)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |somadorMulticilo4T|blocoOperativo4T:BO|registerN:T                                     ; registerN          ; work         ;
+;       |registerN:cont|              ; 0 (0)               ; 4 (4)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |somadorMulticilo4T|blocoOperativo4T:BO|registerN:cont                                  ; registerN          ; work         ;
++-------------------------------------+---------------------+---------------------------+-------------+--------------+---------+-----------+------+--------------+-----------------------------------------------------------------------------------------+--------------------+--------------+
+Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
+
+
+Encoding Type:  One-Hot
++----------------------------------------------------------------------------------------------------------+
+; State Machine - |somadorMulticilo4T|blocoControle4T:BC|currentState                                      ;
++-----------------+----------------+-----------------+-----------------+-----------------+-----------------+
+; Name            ; currentState.E ; currentState.S3 ; currentState.S2 ; currentState.S1 ; currentState.S0 ;
++-----------------+----------------+-----------------+-----------------+-----------------+-----------------+
+; currentState.S0 ; 0              ; 0               ; 0               ; 0               ; 0               ;
+; currentState.S1 ; 0              ; 0               ; 0               ; 1               ; 1               ;
+; currentState.S2 ; 0              ; 0               ; 1               ; 0               ; 1               ;
+; currentState.S3 ; 0              ; 1               ; 0               ; 0               ; 1               ;
+; currentState.E  ; 1              ; 0               ; 0               ; 0               ; 1               ;
++-----------------+----------------+-----------------+-----------------+-----------------+-----------------+
+
+
++---------------------------------------------------------------------------------------------------+
+; User-Specified and Inferred Latches                                                               ;
++----------------------------------------------------+---------------------+------------------------+
+; Latch Name                                         ; Latch Enable Signal ; Free of Timing Hazards ;
++----------------------------------------------------+---------------------+------------------------+
+; blocoControle4T:BC|nextState.E_150                 ; GND                 ; yes                    ;
+; blocoControle4T:BC|nextState.S0_194                ; GND                 ; yes                    ;
+; blocoControle4T:BC|nextState.S1_183                ; GND                 ; yes                    ;
+; blocoControle4T:BC|nextState.S2_172                ; GND                 ; yes                    ;
+; blocoControle4T:BC|nextState.S3_161                ; GND                 ; yes                    ;
+; Number of user-specified and inferred latches = 5  ;                     ;                        ;
++----------------------------------------------------+---------------------+------------------------+
+Note: All latches listed above may not be present at the end of synthesis due to various synthesis optimizations.
+
+
++------------------------------------------------------+
+; General Register Statistics                          ;
++----------------------------------------------+-------+
+; Statistic                                    ; Value ;
++----------------------------------------------+-------+
+; Total registers                              ; 25    ;
+; Number of registers using Synchronous Clear  ; 0     ;
+; Number of registers using Synchronous Load   ; 0     ;
+; Number of registers using Asynchronous Clear ; 25    ;
+; Number of registers using Asynchronous Load  ; 0     ;
+; Number of registers using Clock Enable       ; 20    ;
+; Number of registers using Preset             ; 0     ;
++----------------------------------------------+-------+
+
+
++-------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Multiplexer Restructuring Statistics (Restructuring Performed)                                                                                                    ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+-----------------------------------------------------+
+; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output                          ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+-----------------------------------------------------+
+; 4:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; No         ; |somadorMulticilo4T|blocoControle4T:BC|nextState.S3 ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+-----------------------------------------------------+
+
+
++------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: Top-level Entity: |somadorMulticilo4T ;
++----------------+-------+-----------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                      ;
++----------------+-------+-----------------------------------------------------------+
+; width_ent      ; 8     ; Signed Integer                                            ;
+; width_n        ; 4     ; Signed Integer                                            ;
++----------------+-------+-----------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: blocoOperativo4T:BO ;
++----------------+-------+-----------------------------------------+
+; Parameter Name ; Value ; Type                                    ;
++----------------+-------+-----------------------------------------+
+; width_ent      ; 8     ; Signed Integer                          ;
+; width_n        ; 4     ; Signed Integer                          ;
++----------------+-------+-----------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++--------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: blocoOperativo4T:BO|multiplexer2x1:mux0 ;
++----------------+-------+-------------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                        ;
++----------------+-------+-------------------------------------------------------------+
+; width          ; 4     ; Signed Integer                                              ;
++----------------+-------+-------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++---------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: blocoOperativo4T:BO|registerN:cont ;
++----------------+-------+--------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                   ;
++----------------+-------+--------------------------------------------------------+
+; width          ; 4     ; Signed Integer                                         ;
+; resetvalue     ; 0     ; Signed Integer                                         ;
++----------------+-------+--------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++----------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: blocoOperativo4T:BO|addersubtractor:subtractor0 ;
++----------------+-------+---------------------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                                ;
++----------------+-------+---------------------------------------------------------------------+
+; n              ; 4     ; Signed Integer                                                      ;
+; isadder        ; false ; Enumerated                                                          ;
+; issubtractor   ; true  ; Enumerated                                                          ;
+; generateovf    ; false ; Enumerated                                                          ;
++----------------+-------+---------------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-----------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: blocoOperativo4T:BO|compare:compare0 ;
++------------------+-------+--------------------------------------------------------+
+; Parameter Name   ; Value ; Type                                                   ;
++------------------+-------+--------------------------------------------------------+
+; width            ; 4     ; Signed Integer                                         ;
+; issigned         ; false ; Enumerated                                             ;
+; generatelessthan ; false ; Enumerated                                             ;
+; generateequal    ; true  ; Enumerated                                             ;
++------------------+-------+--------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++--------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: blocoOperativo4T:BO|multiplexer2x1:mux1 ;
++----------------+-------+-------------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                        ;
++----------------+-------+-------------------------------------------------------------+
+; width          ; 8     ; Signed Integer                                              ;
++----------------+-------+-------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: blocoOperativo4T:BO|registerN:AC ;
++----------------+-------+------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                 ;
++----------------+-------+------------------------------------------------------+
+; width          ; 8     ; Signed Integer                                       ;
+; resetvalue     ; 0     ; Signed Integer                                       ;
++----------------+-------+------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: blocoOperativo4T:BO|registerN:T ;
++----------------+-------+-----------------------------------------------------+
+; Parameter Name ; Value ; Type                                                ;
++----------------+-------+-----------------------------------------------------+
+; width          ; 8     ; Signed Integer                                      ;
+; resetvalue     ; 0     ; Signed Integer                                      ;
++----------------+-------+-----------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-----------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: blocoOperativo4T:BO|addersubtractor:adder0 ;
++----------------+-------+----------------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                           ;
++----------------+-------+----------------------------------------------------------------+
+; n              ; 8     ; Signed Integer                                                 ;
+; isadder        ; true  ; Enumerated                                                     ;
+; issubtractor   ; false ; Enumerated                                                     ;
+; generateovf    ; true  ; Enumerated                                                     ;
++----------------+-------+----------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "blocoOperativo4T:BO|addersubtractor:adder0|fulladder1bit:\gera:0:fa" ;
++------+-------+----------+-----------------------------------------------------------------------+
+; Port ; Type  ; Severity ; Details                                                               ;
++------+-------+----------+-----------------------------------------------------------------------+
+; cin  ; Input ; Info     ; Stuck at GND                                                          ;
++------+-------+----------+-----------------------------------------------------------------------+
+
+
++----------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "blocoOperativo4T:BO|addersubtractor:adder0"                                         ;
++------+--------+----------+-------------------------------------------------------------------------------------+
+; Port ; Type   ; Severity ; Details                                                                             ;
++------+--------+----------+-------------------------------------------------------------------------------------+
+; op   ; Input  ; Info     ; Stuck at GND                                                                        ;
+; ovf  ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
++------+--------+----------+-------------------------------------------------------------------------------------+
+
+
++---------------------------------------------------------------------+
+; Port Connectivity Checks: "blocoOperativo4T:BO|multiplexer2x1:mux1" ;
++--------+-------+----------+-----------------------------------------+
+; Port   ; Type  ; Severity ; Details                                 ;
++--------+-------+----------+-----------------------------------------+
+; input1 ; Input ; Info     ; Stuck at GND                            ;
++--------+-------+----------+-----------------------------------------+
+
+
++--------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "blocoOperativo4T:BO|compare:compare0"                                                   ;
++----------+--------+----------+-------------------------------------------------------------------------------------+
+; Port     ; Type   ; Severity ; Details                                                                             ;
++----------+--------+----------+-------------------------------------------------------------------------------------+
+; input1   ; Input  ; Info     ; Stuck at GND                                                                        ;
+; lessthan ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
++----------+--------+----------+-------------------------------------------------------------------------------------+
+
+
++------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "blocoOperativo4T:BO|addersubtractor:subtractor0|fulladder1bit:\gera:0:fa" ;
++------+-------+----------+----------------------------------------------------------------------------+
+; Port ; Type  ; Severity ; Details                                                                    ;
++------+-------+----------+----------------------------------------------------------------------------+
+; cin  ; Input ; Info     ; Stuck at VCC                                                               ;
++------+-------+----------+----------------------------------------------------------------------------+
+
+
++-------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "blocoOperativo4T:BO|addersubtractor:subtractor0"                                       ;
++---------+--------+----------+-------------------------------------------------------------------------------------+
+; Port    ; Type   ; Severity ; Details                                                                             ;
++---------+--------+----------+-------------------------------------------------------------------------------------+
+; op      ; Input  ; Info     ; Stuck at VCC                                                                        ;
+; b[3..1] ; Input  ; Info     ; Stuck at GND                                                                        ;
+; b[0]    ; Input  ; Info     ; Stuck at VCC                                                                        ;
+; ovf     ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
+; cout    ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
++---------+--------+----------+-------------------------------------------------------------------------------------+
+
+
++-----------------------------------------------------+
+; Post-Synthesis Netlist Statistics for Top Partition ;
++-----------------------+-----------------------------+
+; Type                  ; Count                       ;
++-----------------------+-----------------------------+
+; boundary_port         ; 30                          ;
+; cycloneiii_ff         ; 25                          ;
+;     CLR               ; 5                           ;
+;     ENA CLR           ; 20                          ;
+; cycloneiii_lcell_comb ; 52                          ;
+;     normal            ; 52                          ;
+;         1 data inputs ; 2                           ;
+;         2 data inputs ; 10                          ;
+;         3 data inputs ; 17                          ;
+;         4 data inputs ; 23                          ;
+;                       ;                             ;
+; Max LUT depth         ; 10.00                       ;
+; Average LUT depth     ; 4.87                        ;
++-----------------------+-----------------------------+
+
+
++-------------------------------+
+; Elapsed Time Per Partition    ;
++----------------+--------------+
+; Partition Name ; Elapsed Time ;
++----------------+--------------+
+; Top            ; 00:00:00     ;
++----------------+--------------+
+
+
++-------------------------------+
+; Analysis & Synthesis Messages ;
++-------------------------------+
+Info: *******************************************************************
+Info: Running Quartus Prime Analysis & Synthesis
+    Info: Version 20.1.1 Build 720 11/11/2020 SJ Lite Edition
+    Info: Processing started: Wed Jul 28 18:35:11 2021
+Info: Command: quartus_map --read_settings_files=on --write_settings_files=off somadorMulticilo4T -c somadorMulticilo4T
+Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
+Info (20030): Parallel compilation is enabled and will use 4 of the 4 processors detected
+Info (12021): Found 2 design units, including 1 entities, in source file multiplexer2x1.vhd
+    Info (12022): Found design unit 1: multiplexer2x1-behav0 File: /home/rafael/Documents/qt/somadorMulticilo4T/multiplexer2x1.vhd Line: 11
+    Info (12023): Found entity 1: multiplexer2x1 File: /home/rafael/Documents/qt/somadorMulticilo4T/multiplexer2x1.vhd Line: 4
+Info (12021): Found 2 design units, including 1 entities, in source file registerN.vhd
+    Info (12022): Found design unit 1: registerN-behav0 File: /home/rafael/Documents/qt/somadorMulticilo4T/registerN.vhd Line: 15
+    Info (12023): Found entity 1: registerN File: /home/rafael/Documents/qt/somadorMulticilo4T/registerN.vhd Line: 5
+Info (12021): Found 2 design units, including 1 entities, in source file fulladder1bit.vhd
+    Info (12022): Found design unit 1: fulladder1bit-arch1 File: /home/rafael/Documents/qt/somadorMulticilo4T/fulladder1bit.vhd Line: 16
+    Info (12023): Found entity 1: fulladder1bit File: /home/rafael/Documents/qt/somadorMulticilo4T/fulladder1bit.vhd Line: 8
+Info (12021): Found 2 design units, including 1 entities, in source file compare.vhd
+    Info (12022): Found design unit 1: compare-behav0 File: /home/rafael/Documents/qt/somadorMulticilo4T/compare.vhd Line: 14
+    Info (12023): Found entity 1: compare File: /home/rafael/Documents/qt/somadorMulticilo4T/compare.vhd Line: 5
+Info (12021): Found 2 design units, including 1 entities, in source file blocoOperativo4T.vhd
+    Info (12022): Found design unit 1: blocoOperativo4T-descricaoEstrutural File: /home/rafael/Documents/qt/somadorMulticilo4T/blocoOperativo4T.vhd Line: 24
+    Info (12023): Found entity 1: blocoOperativo4T File: /home/rafael/Documents/qt/somadorMulticilo4T/blocoOperativo4T.vhd Line: 6
+Info (12021): Found 2 design units, including 1 entities, in source file blocoControle4T.vhd
+    Info (12022): Found design unit 1: blocoControle4T-descricaoComportamental File: /home/rafael/Documents/qt/somadorMulticilo4T/blocoControle4T.vhd Line: 20
+    Info (12023): Found entity 1: blocoControle4T File: /home/rafael/Documents/qt/somadorMulticilo4T/blocoControle4T.vhd Line: 5
+Info (12021): Found 1 design units, including 0 entities, in source file BC_State.vhd
+    Info (12022): Found design unit 1: BC_State File: /home/rafael/Documents/qt/somadorMulticilo4T/BC_State.vhd Line: 8
+Info (12021): Found 2 design units, including 1 entities, in source file addersubtractor.vhd
+    Info (12022): Found design unit 1: addersubtractor-arch1 File: /home/rafael/Documents/qt/somadorMulticilo4T/addersubtractor.vhd Line: 17
+    Info (12023): Found entity 1: addersubtractor File: /home/rafael/Documents/qt/somadorMulticilo4T/addersubtractor.vhd Line: 4
+Warning (12125): Using design file somadorMulticilo4T.vhd, which is not specified as a design file for the current project, but contains definitions for 2 design units and 1 entities in project
+    Info (12022): Found design unit 1: somadorMulticilo4T-descricaoEstrutural File: /home/rafael/Documents/qt/somadorMulticilo4T/somadorMulticilo4T.vhd Line: 23
+    Info (12023): Found entity 1: somadorMulticilo4T File: /home/rafael/Documents/qt/somadorMulticilo4T/somadorMulticilo4T.vhd Line: 5
+Info (12127): Elaborating entity "somadorMulticilo4T" for the top level hierarchy
+Info (12128): Elaborating entity "blocoOperativo4T" for hierarchy "blocoOperativo4T:BO" File: /home/rafael/Documents/qt/somadorMulticilo4T/somadorMulticilo4T.vhd Line: 62
+Info (12128): Elaborating entity "multiplexer2x1" for hierarchy "blocoOperativo4T:BO|multiplexer2x1:mux0" File: /home/rafael/Documents/qt/somadorMulticilo4T/blocoOperativo4T.vhd Line: 78
+Info (12128): Elaborating entity "registerN" for hierarchy "blocoOperativo4T:BO|registerN:cont" File: /home/rafael/Documents/qt/somadorMulticilo4T/blocoOperativo4T.vhd Line: 81
+Info (12128): Elaborating entity "addersubtractor" for hierarchy "blocoOperativo4T:BO|addersubtractor:subtractor0" File: /home/rafael/Documents/qt/somadorMulticilo4T/blocoOperativo4T.vhd Line: 85
+Warning (10873): Using initial value X (don't care) for net "ovf" at addersubtractor.vhd(12) File: /home/rafael/Documents/qt/somadorMulticilo4T/addersubtractor.vhd Line: 12
+Info (12128): Elaborating entity "fulladder1bit" for hierarchy "blocoOperativo4T:BO|addersubtractor:subtractor0|fulladder1bit:\gera:3:fa" File: /home/rafael/Documents/qt/somadorMulticilo4T/addersubtractor.vhd Line: 28
+Info (12128): Elaborating entity "compare" for hierarchy "blocoOperativo4T:BO|compare:compare0" File: /home/rafael/Documents/qt/somadorMulticilo4T/blocoOperativo4T.vhd Line: 88
+Warning (10873): Using initial value X (don't care) for net "lessThan" at compare.vhd(11) File: /home/rafael/Documents/qt/somadorMulticilo4T/compare.vhd Line: 11
+Info (12128): Elaborating entity "multiplexer2x1" for hierarchy "blocoOperativo4T:BO|multiplexer2x1:mux1" File: /home/rafael/Documents/qt/somadorMulticilo4T/blocoOperativo4T.vhd Line: 92
+Info (12128): Elaborating entity "registerN" for hierarchy "blocoOperativo4T:BO|registerN:AC" File: /home/rafael/Documents/qt/somadorMulticilo4T/blocoOperativo4T.vhd Line: 95
+Info (12128): Elaborating entity "addersubtractor" for hierarchy "blocoOperativo4T:BO|addersubtractor:adder0" File: /home/rafael/Documents/qt/somadorMulticilo4T/blocoOperativo4T.vhd Line: 103
+Info (12128): Elaborating entity "blocoControle4T" for hierarchy "blocoControle4T:BC" File: /home/rafael/Documents/qt/somadorMulticilo4T/somadorMulticilo4T.vhd Line: 69
+Info (10041): Inferred latch for "nextState.E" at blocoControle4T.vhd(26) File: /home/rafael/Documents/qt/somadorMulticilo4T/blocoControle4T.vhd Line: 26
+Info (10041): Inferred latch for "nextState.S3" at blocoControle4T.vhd(26) File: /home/rafael/Documents/qt/somadorMulticilo4T/blocoControle4T.vhd Line: 26
+Info (10041): Inferred latch for "nextState.S2" at blocoControle4T.vhd(26) File: /home/rafael/Documents/qt/somadorMulticilo4T/blocoControle4T.vhd Line: 26
+Info (10041): Inferred latch for "nextState.S1" at blocoControle4T.vhd(26) File: /home/rafael/Documents/qt/somadorMulticilo4T/blocoControle4T.vhd Line: 26
+Info (10041): Inferred latch for "nextState.S0" at blocoControle4T.vhd(26) File: /home/rafael/Documents/qt/somadorMulticilo4T/blocoControle4T.vhd Line: 26
+Info (286030): Timing-Driven Synthesis is running
+Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
+    Info (16011): Adding 0 node(s), including 0 DDIO, 0 PLL, 0 transceiver and 0 LCELL
+Info (21057): Implemented 93 device resources after synthesis - the final resource count might be different
+    Info (21058): Implemented 15 input pins
+    Info (21059): Implemented 15 output pins
+    Info (21061): Implemented 63 logic cells
+Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 4 warnings
+    Info: Peak virtual memory: 435 megabytes
+    Info: Processing ended: Wed Jul 28 18:35:20 2021
+    Info: Elapsed time: 00:00:09
+    Info: Total CPU time (on all processors): 00:00:23
+
+

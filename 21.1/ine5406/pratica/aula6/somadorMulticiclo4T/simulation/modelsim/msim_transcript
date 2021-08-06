@@ -1,0 +1,75 @@
+# do somadorMulticilo4T_run_msim_gate_vhdl.do
+# if {[file exists gate_work]} {
+# 	vdel -lib gate_work -all
+# }
+# vlib gate_work
+# vmap work gate_work
+# Model Technology ModelSim - Intel FPGA Edition vmap 2020.1 Lib Mapping Utility 2020.02 Feb 28 2020
+# vmap work gate_work 
+# Copying /home/rafael/intelFPGA_lite/20.1/modelsim_ase/linuxaloem/../modelsim.ini to modelsim.ini
+# Modifying modelsim.ini
+# 
+# vcom -93 -work work {somadorMulticilo4T_6_1200mv_85c_slow.vho}
+# Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
+# Start time: 09:15:39 on Jul 27,2021
+# vcom -reportprogress 300 -93 -work work somadorMulticilo4T_6_1200mv_85c_slow.vho 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package VITAL_Timing
+# -- Loading package VITAL_Primitives
+# -- Loading package cycloneive_atom_pack
+# -- Loading package cycloneive_components
+# -- Compiling entity hard_block
+# -- Compiling architecture structure of hard_block
+# -- Loading package dffeas_pack
+# -- Loading package altera_primitives_components
+# -- Compiling entity somadorMulticilo4T
+# -- Compiling architecture structure of somadorMulticilo4T
+# End time: 09:15:39 on Jul 27,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# 
+vsim -i -l msim_transcript work.somadormulticilo4t -sdftyp /=/home/rafael/Documents/qt/somadorMulticilo4T/simulation/modelsim/somadorMulticilo4T_6_1200mv_85c_vhd_slow.sdo
+# vsim -i -l msim_transcript work.somadormulticilo4t -sdftyp "/=/home/rafael/Documents/qt/somadorMulticilo4T/simulation/modelsim/somadorMulticilo4T_6_1200mv_85c_vhd_slow.sdo" 
+# Start time: 09:17:03 on Jul 27,2021
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.vital_timing(body)
+# Loading ieee.vital_primitives(body)
+# Loading altera.dffeas_pack
+# Loading altera.altera_primitives_components
+# Loading cycloneive.cycloneive_atom_pack(body)
+# Loading cycloneive.cycloneive_components
+# Loading work.somadormulticilo4t(structure)
+# SDF 2020.1 Compiler 2020.02 Feb 28 2020
+# Loading work.hard_block(structure)
+# Loading ieee.std_logic_arith(body)
+# Loading cycloneive.cycloneive_io_obuf(arch)
+# Loading cycloneive.cycloneive_io_ibuf(arch)
+# Loading cycloneive.cycloneive_clkctrl(vital_clkctrl)
+# Loading cycloneive.cycloneive_ena_reg(behave)
+# Loading cycloneive.cycloneive_lcell_comb(vital_lcell_comb)
+# Loading altera.dffeas(vital_dffeas)
+# Loading instances from /home/rafael/Documents/qt/somadorMulticilo4T/simulation/modelsim/somadorMulticilo4T_6_1200mv_85c_vhd_slow.sdo
+# Loading timing data from /home/rafael/Documents/qt/somadorMulticilo4T/simulation/modelsim/somadorMulticilo4T_6_1200mv_85c_vhd_slow.sdo
+# ** Note: (vsim-3587) SDF Backannotation Successfully Completed.
+#    Time: 0 ps  Iteration: 0  Instance: /somadormulticilo4t File: somadorMulticilo4T_6_1200mv_85c_slow.vho
+quit -sim
+# End time: 09:17:09 on Jul 27,2021, Elapsed time: 0:00:06
+# Errors: 0, Warnings: 0
+vcom -reportprogress 300 -work work /home/rafael/Documents/qt/somadorMulticilo4T/simulation/modelsim/somadorMulticilo4T.vht
+# Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
+# Start time: 09:17:13 on Jul 27,2021
+# vcom -reportprogress 300 -work work /home/rafael/Documents/qt/somadorMulticilo4T/simulation/modelsim/somadorMulticilo4T.vht 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package MATH_REAL
+# ** Error: (vcom-11) Could not find work.bc_state.
+# ** Error (suppressible): /home/rafael/Documents/qt/somadorMulticilo4T/simulation/modelsim/somadorMulticilo4T.vht(8): (vcom-1195) Cannot find expanded name "work.BC_State".
+# ** Error: /home/rafael/Documents/qt/somadorMulticilo4T/simulation/modelsim/somadorMulticilo4T.vht(8): Unknown expanded name.
+# ** Note: /home/rafael/Documents/qt/somadorMulticilo4T/simulation/modelsim/somadorMulticilo4T.vht(10): VHDL Compiler exiting
+# End time: 09:17:13 on Jul 27,2021, Elapsed time: 0:00:00
+# Errors: 3, Warnings: 0
