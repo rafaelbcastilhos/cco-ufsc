@@ -1,0 +1,18 @@
+|ManchesterEncoder
+clock => currentState~1.DATAIN
+reset => currentState~3.DATAIN
+v => nextState.IN0
+v => nextState.IN0
+v => nextState.IN0
+v => nextState.IN0
+v => nextState.IN0
+v => nextState.IN0
+d => nextState.IN1
+d => nextState.IN1
+d => nextState.IN1
+d => nextState.IN1
+d => nextState.IN1
+d => nextState.IN1
+y << y.DB_MAX_OUTPUT_PORT_TYPE
+
+
