@@ -1,0 +1,28 @@
+library ieee;
+use ieee.std_logic_1164.all;
+
+entity blococontrole_sad is
+	port(
+		-- control in
+		ck, reset, iniciar, 
+		menor : in std_logic;
+		-- data in
+		-- controll out
+		zi, ci, cpA, cpB, zsoma, csoma, csad_reg, 
+		readmem, pronto: out std_logic
+		-- data out
+	);
+end entity;
+
+architecture archbehav of blococontrole_sad is
+-- COMPLETE
+begin
+    -- logica de proximo estado
+    -- COMPLETE
+    
+    -- regitrador de estado
+    -- COMPLETE
+    
+    -- logica de saida
+    -- COMPLETE
+end architecture;
