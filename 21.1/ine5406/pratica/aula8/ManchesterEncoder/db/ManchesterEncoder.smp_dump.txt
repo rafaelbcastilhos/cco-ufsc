@@ -1,8 +1,0 @@
-
-State Machine - |ManchesterEncoder|currentState
-Name currentState.s1b currentState.s1a currentState.s0b currentState.s0a currentState.idle 
-currentState.idle 0 0 0 0 0 
-currentState.s0a 0 0 0 1 1 
-currentState.s0b 0 0 1 0 1 
-currentState.s1a 0 1 0 0 1 
-currentState.s1b 1 0 0 0 1 

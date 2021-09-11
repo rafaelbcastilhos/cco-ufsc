@@ -1,8 +1,0 @@
-
-State Machine - |somadorMulticilo4T|blocoControle4T:BC|currentState
-Name currentState.E currentState.S3 currentState.S2 currentState.S1 currentState.S0 
-currentState.S0 0 0 0 0 0 
-currentState.S1 0 0 0 1 1 
-currentState.S2 0 0 1 0 1 
-currentState.S3 0 1 0 0 1 
-currentState.E 1 0 0 0 1 
