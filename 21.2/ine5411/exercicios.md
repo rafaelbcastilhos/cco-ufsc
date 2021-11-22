@@ -217,7 +217,7 @@ How could each of the two proposed changes decrease the size of an MIPS assembly
 
 - *Diminuir o tamanho*: considerando que teriamos mais registradores, menos operações na pilha seriam feitas, então gastariamos menos instruções para realizar essas operações, resultando em um programa menor. Além disso, com o aumento da variedade de instruções, poderiamos ter novas instruções que realizam em uma única instrução operações que hoje fazemos em duas ou mais, também reduzindo o tamanho do código. Essa última consequência também poderia ser acompanhada de modificações no hardware.
 
-- *Aumentar o tamanho*: como aumentamos o tamanho de instrução para 40 bits (instrução R com 40 bits e instrução I com 38, provavelmente seria arrendondado para cima para manter um padrão), o tamanho total do código em bits iria aumentar.  
+- *Aumentar o tamanho*: como aumentamos o tamanho de instrução para 40 bits (instrução R com 40 bits e instrução I com 38, provavelmente seria arrendondado para cima para manter um padrão), o tamanho total do código em bits iria aumentar.
 
 ### 2.19
 
