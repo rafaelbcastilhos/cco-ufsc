@@ -11,9 +11,7 @@
 \maketitle
 
 \begin{abstract}
-O presente artigo visa fomentar um debate sobre o estado da arte das aplicações da computação em nuvem, a fim de prover ao leitor o material necessário para compreender a importância da multidisciplinaridade entre as mais diversas áreas da computação.
-
-A metodologia utilizada para realizar a coleta foi dada por intermédio de pesquisas bibliográficas buscando materiais publicados nos últimos 3 anos em periódicos e congressos nacionais e internacionais.
+O presente artigo visa fomentar um debate sobre o estado da arte das aplicações da computação em nuvem, a fim de prover ao leitor o material necessário para compreender a importância da multidisciplinaridade entre as mais diversas áreas da computação. A metodologia utilizada para realizar a coleta foi dada por intermédio de pesquisas bibliográficas buscando materiais publicados nos últimos 3 anos em periódicos e congressos nacionais e internacionais.
 
 \textbf{Palavras-chave:} Computação; Nuvem; Infraestrutura; Redes; Web-services; Servidor-Cliente; Segurança.
 
@@ -25,25 +23,28 @@ A metodologia utilizada para realizar a coleta foi dada por intermédio de pesqu
 
 O crescimento gradativo no interesse na área de computação em nuvem traz consigo confusões quanto as reais aplicações e metodologia de desenvolvimento dessa tecnologia, sendo que as observações realizadas são disseminadas principalmente por publicações equivocadas em portais que induzem a breve leitura sobre determinado assunto, acarretando em desinformação. 
 
-Outrossim, é notável que a expansão da indústria seja suportada pelo avanço das tecnologias em redes de computadores e mais recentemente pelas possibilidades de aplicabilidade da computação em nuvem.
+Outrossim, a computação em nuvem é uma solução tão abrangente que entrega TI como um serviço \cite{oliveira}. É notável que a expansão da indústria seja suportada pelo avanço das tecnologias em redes de computadores e mais recentemente pelas possibilidades de aplicabilidade da computação em nuvem.
 
 Desta forma, é de extrema importância que a comunidade científica elabore publicações que tenham o intuito de colaborar com a formação de uma melhor fonte de conhecimento para o público geral.
 
 \subsection{Justificativa}
 
-Os conceitos que serão abordados em seguida estão em alta no âmbito mundial. Pesquisas e avanços vem são desenvolvidos todos os dias, tanto em ambiente acadêmico, quanto institucional, propiciando elevado grau de maleabilidade sob o entendimento do leitor.
+Com o mundo cada vez mais virtualizado, a Cloud Computing é considerada uma ferramenta importante para aumentar a produtividade \cite{loos}. Por isso os conceitos que serão abordados em seguida estão em alta no âmbito mundial. Pesquisas e avanços vem são desenvolvidos todos os dias, tanto em ambiente acadêmico, quanto institucional, propiciando elevado grau de maleabilidade sob o entendimento do leitor.
 
 Desse modo, é essencial que sejam realizadas revisões com frequência, com o fito de manter-se atualizado e verificar qual o estado atual dessas pesquisas. Somente a partir de um processo de revisão desses é possível compreender o estado da arte.
 
 \subsection{Objetivos}
 
+\subsubsection{Gerais}
 Esse artigo possui como objetivo geral introduzir conceitos para o melhor entendimento do conteúdo, debater as principais aplicações na indústria e apontar os avanços importantes nessa área.
 
+\subsubsection{Específicos}
 Os objetivos específicos se propõem à ingressar o leitor no assunto de computação em nuvem, descrever de forma resumida as possíveis técnicas e aplicações disponíveis e relacionar o estado da arte com as situações reais.
 
 \subsection{Organização}
 
-O artigo está dividido da seguinte maneira: uma breve introdução sobre computação em nuvem; uma série de exemplos práticos da utilização de serviços e suas aplicações; e por fim uma discussão sobre o que há de mais avançado sendo desenvolvido em universidade e indústrias pelo mundo.
+Este artigo está organizado da seguinte forma:
+Na seção 2, conceitos básicos, temos uma breve introdução aos conceitos que serão necessários para o entendimento do trabalho, a definição e explicação de Computação em nuvem, Infraestrutura e Aplicações. Na seção 3, trabalhos correlatos estão outras obras relacionadas da área, a fim de explicar a importância das aplicações em nuvem. Na seção 4, aspectos relevantes, são ressaltados os pontos específicos que devem ser levados em consideração quando tratamos de aplicações voltadas ao escopo de computação em nuvem; Na seção 5, problemas existentes, é exemplificado as dificuldades, dores e desafios associados à esta área de pesquisa; Na seção 6, soluções possíveis, pretende-se apresentar soluções para os desafios citados na quinta seção. Por fim, em referências bibliográficas estão listados todos os trabalhos e artigos utilizados como base para a elaboração deste artigo.
 
 \section{Conceitos básicos}
 
@@ -55,7 +56,7 @@ Em 2006 a \emph{Amazon} amadureceu o conceito da \emph{Elastic Computing Cloud} 
 
 Computação em nuvem é definida pelo \emph{National Institute of Standards and Technology (NIST)} como um modelo para permitir acesso sob demanda onipresente e conveniente via rede a um \emph{pool} de recursos computacionais compartilhados, que podem ser configuráveis (rede, servidor, armazenamento, serviços) sendo rapidamente provisionados e lançados com o mínimo de esforço.
 
-As cinco características fundamentais são: serviço fornecido sob demanda, acesso a rede pública, rápida elasticidade e medição dos recursos.
+As cinco características fundamentais são: serviço fornecido sob demanda, acesso a rede pública, pool de recursos, rápida elasticidade e medição dos serviços.
 \subsection{Infraestrutura}
 
 As informações não são alocadas em uma única máquina como é feito em um servidor físico, por isso é disponibilizado um conjunto de máquinas que realizam o processamento dessas informações, reduzindo significativamente a carga de trabalho nos computadores locais, uma vez que não precisam mais executar as aplicações.
@@ -66,7 +67,7 @@ As informações não são alocadas em uma única máquina como é feito em um s
 
 A infraestrutura pode ser visualizada como sendo composta pela camada física e camada de abstração. A física consiste em todo o hardware necessário para prover todos os serviços, incluindo servidor, armazenamento e componentes de rede. A de abstração é o software que roda sobre a camada física.
 
-\subsection{Aplicabilidade}
+\subsection{Aplicações}
 
 A acessibilidade para esses serviços, se dá por meio de inúmeras empresas, entre elas, as mais populares são \emph{Amazon Web Services}, \emph{Google Cloud Plataform}, \emph{Microsoft Azure} e \emph{IBM Cloud}, que fornecem um núcleo de funcionalidades genérico, onde cada uma possui características e especificações únicas.
 
@@ -144,6 +145,27 @@ Zhang \emph{et al.} propõe uma estrutura eficiente para a computação movel e 
 
 Diante disso, os resultados da simulação mostram que a ferramenta proposta pode maximizar o lucro e promover o bem-estar social.
 
+\section{Aspectos relevantes}
+Após concluir a leitura dos artigos de base, foi constatado uma interdisciplinaridade expressiva referente à gama de contextos em que a computação em nuvem pode ser aplicada.
+
+Preambularmente, por se tratar de uma área em ascensão, o espaço para novas e criativas ideias se mostra enorme. Em termos de interações, existem vários cenários possíveis, geralmente, um consumidor de nuvem pode solicitar uma nuvem serviço de um provedor de nuvem, diretamente ou por meio de uma nuvem corretora, sendo que o auditor conduz auditorias independentes \cite{donno}. Isso impacta no desenvolvimento de padrões e soluções gerais, pois quanto mais variáveis possíveis de serem aplicadas ao sistema, maior a complexidade exigida sobre a área de cobertura e suporte.
+
+Outro aspecto importante é aos modelos de implantação disponíveis: Nuvem privada é de uso exclusivo da organização e clientes, sendo que a infraestrutura está estabelecida nas premissas da organização. Na Nuvem pública, os serviços são disponibilizadas para todos os seus clientes, sendo que a infraestrutura está estabelecida no prestador dos serviços. A Nuvem híbrida combina dois ou mais modelos, compartilhando setores com um conjunto de organizações ou empresas. Por fim, a Nuvem comunitária é hospedada em um terceiro agente, sendo um modelo mutuamente compartilhado por entidades como bancos, governos e sociedades comerciais. 
+
+Nesse viés, atualmente existem três tipo populares de serviços na computação em nuvem, que estão sendo adotados pela indústria, eles são: Plataforma como Serviço, provém benefícios de maior agilidade nos negócios do que um método tradicional, de acordo com Pethiyagoda e Hettige a próxima geração está prevista para revolucionar o campo de desenvolvimento, tornando-o simples para não programadores. Infraestrutura como Serviço exige que os usuários finais implantem e operem os serviços de software, de forma análoga de como fariam em seu próprio data center. O consumidor pode escolher o sistema operacional, banco de dados e ambiente de desenvolvimento de aplicativos, o que dá o maior controle do consumidor sobre o hardware em comparação com Plataforma como Serviço. Por último, o Software como Serviço suporta aplicativos baseados na Internet, no qual o usuário pode acessá-lo por intermédio do navegador, não sendo necessário comprar ou manter o software, pois o provedor cuidará de todos os serviços necessários para seus clientes, tais como manutenção, modificação e software de aplicação atualizações.
+
+Portanto, algumas vantagens da computação em nuvem são: Produtividade, pois ajuda os provedores de nuvem a otimizar o dia-a-dia operações de forma eficiente, permitindo-lhes a liberdade operar sem a intervenção de obsoletos sistemas legados. Escalabilidade, devido ao fato de permitir que as organizações facilmente e aumentem / diminuam rapidamente seus requisitos de negócios. E por fim a Segurança, que, quando aplicada da maneira adequada é robusta na proteção de dados confidenciais, garantindo criptografia de ponta a ponta, utilizando recursos de segurança sofisticados, além disso, cabe destacar que os usuários também podem apagar dados remotamente de as máquinas infectadas no caso de alguma violação para evitar que caia nas mãos erradas\cite{rani}.
+
+\section{Problemas existentes}
+\cite{rani} Apresenta que a tecnologia de computação em nuvem é apreciada devido à sua amplitude e acessibilidade a qualquer hora e em qualquer lugar. No entanto, uma série de problemas prevalecem na computação em nuvem e precisam de atenção. Foi possível identificar durante a leitura dos trabalhos correlatos que existem problemas de certa forma estão interconectados. Nessa seção, esses problemas serão esmiuçados para futura análise e proposição de soluções.
+
+Primeiramente, a vulnerabilidade pode ser dada por diferentes métodos: As APIs costumam ser um problema de proteção, pois não fornecem apenas às empresas a autoridade, mas também autentica e permite acesso para personalizar a capacidade dos serviços em nuvem para atender demandas. Os ataques de negação de serviço, são lançados para determinar um ponto de apoio para posteriormente sequestrar dados confidenciais. Além disso, os malwares são injetados com códigos maliciosos manipulados como parte do código ou serviço que opera dentro dos próprios servidores em nuvem, se tornando um grande suspeito à problema. Não bastando isso, ainda pode acontecer um caso mais raro, que é da perda de dados confidenciais, quando as empresas não estabelecem sistemas de recuperação e acontece alguma catástrofe na região em que o data center está localizado, tornando assim uma questão que não pode ser recuperada, pois não existem cópias fisicamente em outro local.
+
+Posteriormente, existem um problema mundial, o qual as pessoas enfrentarão futuramente, que está conectado às limitações de hardware, não havendo mais espaço para armazenamento de dados. Isso se deve ao fato de que as empresas não conseguem acompanhar o crescimento da largura de banda. Os provedores de nuvem e consumidores devem considerar a ideia de tráfego e suas implicações no posicionamento em cada nível do sistema, com o fito de reduzir os custos, e, para contornar isso, uma opção é realizar o envio lotes.
+
+Outro problema conhecido e explorado por diversos autores, é a performance, pode-se concluir que o atraso que uma nuvem apresenta não é realmente desagradável, sendo que os serviços estão utilizando uma infraestrutura inteligente, com a latência reduzida. Entretanto, conforme citado anteriormente, existe uma gama repleta de contextos em que a computação em nuvem pode ser aplicada, desse modo, de acordo com \cite{prasad}, o escopo das aplicações é limitado apenas para países com conectividade de telefone móvel, pois se não houver, não será possível estabelecer uma conexão. Outro ponto que deve ser considerado no contexto da agricultura é o custo de smartphones, sendo que existe uma parcela de fazendeiros que não são capazes de efetuar a aquisição.
+
+à gama de 
 \nocite{*}
 \medskip
 
