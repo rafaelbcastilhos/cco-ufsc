@@ -1,7 +1,11 @@
 \documentclass[12pt]{article}
 
 \usepackage[portuguese]{babel}
-
+\usepackage{graphicx}
+\usepackage[section]{placeins}
+\usepackage{float}
+\usepackage{url}
+\graphicspath{ {figures} }
 \author{Rafael Begnini de Castilhos}
 \title{Computação em nuvem e suas aplicações: uma pesquisa sobre o estado da arte}
 \date{\today}
@@ -25,7 +29,7 @@ O crescimento gradativo no interesse na área de computação em nuvem traz cons
 
 Outrossim, a computação em nuvem é uma solução tão abrangente que entrega tecnologia da informação como um serviço \cite{oliveira}. É notável que a expansão da indústria seja suportada pelo avanço das tecnologias em redes de computadores e mais recentemente pelas possibilidades de aplicabilidade da computação em nuvem.
 
-Desta forma, é de extrema importância que a comunidade científica elabore publicações que tenham o intuito de colaborar com a formação de uma melhor fonte de conhecimento para o público geral.
+Desta forma, é de extrema importância que a comunidade científica elabore publicações que tenham o fito de colaborar com a formação de uma melhor fonte de conhecimento para o público geral. Da mesma forma, é desejável que a expansão do mercado de tecnologia corrobore e provenha suporte no avanço e manutenibilidade das tecnologias em redes de computadores em nuvem.
 
 \subsection{Justificativa}
 
@@ -44,7 +48,7 @@ Os objetivos específicos se propõem à ingressar o leitor no assunto de comput
 \subsection{Organização}
 
 Este artigo está organizado da seguinte forma:
-Na seção 2, conceitos básicos, temos uma breve introdução aos conceitos que serão necessários para o entendimento do trabalho, a definição e explicação de Computação em nuvem, Infraestrutura e Aplicações. Na seção 3, trabalhos correlatos estão outras obras relacionadas da área, a fim de explicar a importância das aplicações em nuvem. Na seção 4, aspectos relevantes, são ressaltados os pontos específicos que devem ser levados em consideração quando tratamos de aplicações voltadas ao escopo de computação em nuvem; Na seção 5, problemas existentes, é exemplificado as dificuldades, dores e desafios associados à esta área de pesquisa; Na seção 6, soluções possíveis, pretende-se apresentar soluções para os desafios citados na quinta seção. Por fim, em referências bibliográficas estão listados todos os trabalhos e artigos utilizados como base para a elaboração deste artigo.
+Na seção 2, conceitos básicos, temos uma breve introdução aos conceitos que serão necessários para o entendimento do trabalho, a definição e explicação de Computação em nuvem, Infraestrutura e Aplicações. Na seção 3, trabalhos correlatos estão outras obras relacionadas da área, a fim de explicar a importância das aplicações em nuvem. Na seção 4, aspectos relevantes, são ressaltados os pontos específicos que devem ser levados em consideração quando tratamos de aplicações voltadas ao escopo de computação em nuvem; Na seção 5, problemas existentes, é exemplificado as dificuldades, dores e desafios associados à esta área de pesquisa; Na seção 6, soluções possíveis, pretende-se apresentar soluções para os desafios citados na quinta seção.  Na seção 7, entramos a fundo no desenvolvimento da solução proposta por Westphall \emph{et al.} \cite{westphall}. Na seção 8 são apresentadas as conclusões retiradas a partir da análise da bibliografia e trabalhos futuros a serem realizados. Por fim, em referências bibliográficas estão listados todos os trabalhos e artigos utilizados como base para a elaboração deste artigo.
 
 \section{Conceitos básicos}
 
@@ -176,6 +180,38 @@ Em segundo lugar, é necessário desbravar uma metodologia para separar os dados
 Ao que se refere ao problema de performance, a abordagem do modelo \emph{Serverless} que é propagada como uma tecnologia disruptiva e tendenciosa, prometendo não necessário gastar o dinheiro e esforço para comprar e configurar servidores, acaba tendo problemas de desempenho e limitação, se tornando frágil no quesito performance, perante a exigência da indústria. Em contra-partida, no contexto de conectividade de telefone móvel, a implantação da rede 5G deve crescer rapidamente nos próximos anos, sendo capaz de melhorar significativamente a conexão oriunda dos dispositivos móveis com a nuvem, e assim consequentemente conectando mais dispositivos à rede, ampliando o leque de aplicações possíveis de serem provisionadas na nuvem. Outro ponto a ser destacado é que aumentar a potência e a velocidade do data center nem sempre será eficiente.
 
 Contudo, podemos vislumbrar o modo pelo qual a execução de novos sistemas em nuvem prove a alavancagem de novas proposições. Todas essas questões levantam duvidas sobre a percepção das dificuldades. Dado isso, é possível perceber cada vez mais o cuidado necessário para identificar esses pontos críticos, na determinação dos objetivos e metas.
+
+\section{Projeto e Desenvolvimento de uma Proposta}
+\cite{westphall} Apresenta uma experiência com nuvem privada, discutindo o design e implementação (PCMONS) por intermédio de um caso de estudo para ajudar novos adotantes de computação em nuvem à realizar boas decisões na construção e monitoramento de sistemas, abordando uma arquitetura com apenas soluções de código aberto.
+
+\subsection{Arquitetura}
+Os pesquisadores aplicaram a arquitetura descrita para uma aplicação representada na figura 1, que demonstra os níveis das camadas. Na camada de Infraestrutura consiste em instalações de serviços essenciais como hardware e rede, interagindo com o sistema operacional, licenças, \emph{hipervisores} e entre outros. A camada de integração é composta por recursos heterogêneos, requisitando uma interface comum para o acesso. Uma situação típica é quando o usuário solicita uma instanciação de máquina virtual. Um cenário possível é a presença de múltiplas plataformas para computação em nuvem, como \emph{Eucalyptus} e \emph{OpenNebula}. Já a camada de visualização apresenta como o monitoramento por meio de interfaces, nesta camada pode implementar diferentes visões, de acordo com as necessidades da empresa.
+
+\begin{figure}[H]
+    \includegraphics[width=\linewidth]{arquitetura.png}
+    \caption{Arquitetura de sistema de monitoramento de nuvem privada.}
+\end{figure}
+
+\subsection{Caso de estudo}
+Para concretizar o ambiente de teste apresentado na figura 2, o sistema operacional das máquinas físicas foi o \emph{SUSE} Linux, devido à sua fácil instalação e configuração. O \emph{Eucalyptus} é uma solução de software aberto para computação em nuvem que oferece uma interface compatível com \emph{Amazon EC2}. Para exemplificar a situação, foi construído um ambiente nas quais as maquinas virtuais estão disponíveis para usuários que instanciam um servidor web para hospedagem, utilizando ferramentas como \emph{Apache Web Server}, linguagem \emph{PHP} para desenvolvimento de páginas da Web e \emph{SQLite} para persistência de dados.
+
+\begin{figure}[H]
+    \includegraphics[width=\linewidth]{ambiente_teste.png}
+    \caption{Um cenário de ambiente de teste.}
+\end{figure}
+
+Além das tecnologias destacadas acima, os autores utilizaram mais algumas, entre elas a linguagem \emph{Python} foi utilizada durante o desenvolvimento de processos, a linguagem \emph{Perl} também se fez necessário para realizar integrações com software \emph{Eucalyptus} e também a linguagem de \emph{script Bash} para realizar interações com Linux.
+
+\subsection{Resultados obtidos}
+A figura 3 mostra uma visão geral dos \emph{hosts} e grupos monitorados no estudo de caso. O \emph{Nagios} é utilizado para exibir as informações de monitoramento (colunas com nomes dos objetos, nomes dos serviços e seu respectivo status), permitindo possuir uma identificação ágil de falhas ou possíveis problemas durante a execução.
+
+\begin{figure}[H]
+    \includegraphics[width=\linewidth]{interface.png}
+    \caption{Interface representativa do Nagios dos serviços de nuvem monitorados.}
+Durante o processo, os pesquisadores constataram que o monitoramento da computação em nuvem pode se beneficiar dos conceitos estabelecidos para computação distribuída. Em contrapartida, mesmo em nuvens privadas, a heterogeneidade dos recursos de computação pode exigir algum esforço extra ao implementar a solução de monitoramento. Por fim, a pesquisa fornece primeiros passos em direção a uma arquitetura de monitoramento para nuvens privadas. 
+    
+\end{figure}
+
 \nocite{*}
 \medskip
 
