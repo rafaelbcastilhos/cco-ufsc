@@ -1,0 +1,13 @@
+A abordagem utilizada pelo estagiário não possui relação com o problema exposto.
+
+Uma vez que utilizava chunk_size = 1 na primeira diretiva parallel for, fazendo com que cada iteração a thread acessasse uma região crítica, resultando em várias threads esperando o acesso.
+
+Já na segunda diretiva parallel for, acredito fortemente que seja redundante e não tenha o impacto desejado. Por isso a solução seria utilizar uma única diretiva de parallel for englobando as três iterações.
+
+Dado isso, será necessário aplicar uma correção na primeira diretiva parallel, utilizando a estratégia do escalonamento guided.
+
+Por coseguinte foi utilizado a cláusula reduction com o operador de soma (+) com a finalidade de somar todas posições intermediárias do array.
+
+Além disso, com objetivo de aplicar o contexto paralelo aos 3 laços, foi notado na documentação a cláusula collapse, a qual transforma as N iterações em apenas um com o tamanho dos N anteriores (sendo que N > 0), no caso do problema proposto N = 3. 
+
+Por fim, foi concluído que a instrução que define o valor de um índice para 0 se tornou desnecessária, visto a aplicação do reduction com operador de soma (que define o valor inicial para 0).
