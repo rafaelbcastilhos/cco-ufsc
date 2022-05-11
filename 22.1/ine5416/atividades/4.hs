@@ -1,7 +1,7 @@
 data Arvore = Null | No Int Arvore Arvore
 
 minhaArvore :: Arvore
-minhaArvore = No 52 (No 32 (No 12 Null Null) (No 35 Null Null)) (No 56 (No 55 Null Null) (No 32 Null Null))
+minhaArvore = No 52 (No 32 (No 12 Null Null) (No 35 Null Null)) (No 56 (No 55 Null Null) (No 64 Null Null))
 
 somaElementos :: Arvore -> Int
 somaElementos Null = 0
@@ -29,26 +29,25 @@ ocorrencias :: Arvore -> Int -> Int
 ocorrencias Null _ = 0
 ocorrencias (No n esq dir) x 
      | n == x = 1 + (ocorrencias esq x) + (ocorrencias dir x)
-     | otherwise = 0 + (ocorrencias esq x) + (ocorrencias dir x)                               
+     | otherwise = 0 + (ocorrencias esq x) + (ocorrencias dir x) 
 
 maioresQueElemento :: Arvore -> Int -> Int
 maioresQueElemento Null _ = 0
 maioresQueElemento (No n esq dir) x
      | n > x = 1 + (maioresQueElemento esq x) + (maioresQueElemento dir x)
      | otherwise = 0 + (maioresQueElemento esq x) + (maioresQueElemento dir x)
-
+                               
 quantidade:: Arvore -> Int
 quantidade Null = 0
 quantidade(No n esq dir) = 1 + (quantidade esq) + (quantidade dir)
 
-somaElementos :: Arvore -> Int
-somaElementos Null = 0
-somaElementos (No n esq dir) = n + (somaElementos esq) + (somaElementos dir)
+mediaElementos :: Arvore -> Float
+mediaElementos Null = 0
+mediaElementos x = fromIntegral(somaElementos minhaArvore) / fromIntegral (quantidade minhaArvore)
 
-mediaElementos :: Int ->  Int-> Float
-mediaElementos 0 _ = 0
-mediaElementos a b = a / b
-
+elementos :: Arvore -> [Int]
+elementos Null = []
+elementos (No n esq dir) = [n]++(elementos esq)++(elementos dir)
 
 main = do 
      print(somaElementos minhaArvore)
@@ -56,7 +55,8 @@ main = do
      print(buscaElemento minhaArvore 55)
      print(minimoElemento minhaArvore)
      print(ocorrencias minhaArvore 32)
-     print(maioresQueElemento minhaArvore 12)
+     print(maioresQueElemento minhaArvore 30)
      print(quantidade minhaArvore)
-     print(mediaElementos (somaElementos minhaArvore) quantidade minhaArvore)
-
+     print(somaElementos minhaArvore)
+     print(mediaElementos minhaArvore)
+     print(elementos minhaArvore)
