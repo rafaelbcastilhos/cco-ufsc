@@ -1,0 +1,25 @@
+clc
+clear
+a=0;
+b=2;
+x=[a:0.1:b];
+fa=exp(a)*sin(a)-1;
+fb=exp(b)*sin(b)-1;
+fxm=1;
+k=0;
+erro=10^-7;
+while(abs(fxm)>erro)
+  k=k+1;
+  xm=(a+b)/2;
+  fxm=exp(xm)*sin(xm)-1;
+  if (fa*fxm<0)
+    b=xm;
+    fb=fxm;
+   else
+    a=xm;
+    fa=fxm;
+  end
+end
+k
+xm
+abs(fxm)
