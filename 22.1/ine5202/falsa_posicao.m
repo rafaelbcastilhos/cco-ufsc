@@ -2,18 +2,16 @@ function falsa_posicao
 clear
 clc
 a=0;
-b=2;
+b=1;
 fa=funcao(a);
 fb=funcao(b);
-erro=10^-6;
+erro=10^-5;
 k=0;
 fxm=1;
-x=[a:0.1:b];
 while(abs(fxm)>erro)
   k=(k+1);
   xm=a-((fa*(b-a))/(fb-fa));
   fxm=(funcao(xm));
-  r=fa+(((fb-fa)/(b-a))*(x-a)); 
   if fa*fxm<0
    b=xm;
    fb=fxm;
@@ -22,12 +20,12 @@ while(abs(fxm)>erro)
    fa=fxm;
   end
 end
+k
 xm
 abs(fxm)
-k
-abs(a-b)
+
 end
 
 function f=funcao(x)
- f=exp(x)*sin(x)-1;
+ f=10-20*(exp(-0.2 * x)-exp(-0.75 * x))-5;
 end

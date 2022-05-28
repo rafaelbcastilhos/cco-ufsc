@@ -2,10 +2,9 @@ function newton
 clc
 clear
 a=0;
-b=2;
-x=[a:0.1:b];
-x0=0;
-erro=10^-6;
+b=1;
+x0=1;
+erro=10^-5;
 k=0;
 fx=funcao(x0);
 dfx=derivada(x0);
@@ -19,14 +18,13 @@ while (abs(fx)>erro)
 end  
 k
 xk
-fx
-delta
+abs(fx)
 endfunction
 
 function fx=funcao(x)
-  fx=exp(x)*sin(x)-1;
+  fx=10-20*(exp(-0.2 * x)-exp(-0.75 * x))-5;
 endfunction
 
 function fx=derivada(x)
-  fx=exp(x)*sin(x)+exp(x)*cos(x);
+  fx=-15*exp(-0.75*x)+4*exp(-0.2*x)
 endfunction

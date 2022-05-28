@@ -3,7 +3,7 @@ clc
 clear
 x0=0;
 x1=2;
-erro=10^-6;
+erro=10^-5;
 k=0;
 fx0=funcao(x0);
 fx1=funcao(x1);
@@ -18,10 +18,9 @@ while (abs(fx1)>erro)
 end
 k
 xk
-fx1
-delta
+abs(fx1)
 endfunction
 
 function fx=funcao(x)
-  fx=exp(x)*sin(x)-1;
+  fx=10-20*(exp(-0.2 * x)-exp(-0.75 * x))-5;
 end
