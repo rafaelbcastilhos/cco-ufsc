@@ -1,7 +1,7 @@
 import java.math.BigInteger;
 import java.util.Random;
 
-public class RandomNumberAndCheckPrime {
+public class GenRandomNumberAndCheckPrime {
     /*
     Implementaçao do algoritmo Blum Blum Shub para gerar numeros pseudo-aleatorio.
     Calcula o valor do n, que eh utilizado como modulo.
@@ -17,21 +17,21 @@ public class RandomNumberAndCheckPrime {
     */
     public static BigInteger blumBlumShub(int p, int q, int s, int size_key) {
         if (p % 4 != 3)
-            return null ;
+            return null;
         if (s % p == 0 || s % q == 0)
-            return null ;
-        int aux ;
+            return null;
+        int aux;
         int sum = 0;
         int position = 0;
-        int n = p * q ;
-        int x = (int) Math.pow(s , 2) % n ;
+        int n = p * q;
+        int x = (int) Math.pow(s , 2) % n;
         byte data [] = new byte [size_key / 8];
         for (int i = 0; i < size_key ; i++) {
-            x = (int) Math.pow(x, 2) % n ;
+            x = (int) Math.pow(x, 2) % n;
             aux = i % 8;
             if (aux != 7) {
                 if (x % 2 == 1)
-                    sum += (int) Math.pow(2 , aux);
+                    sum += (int) Math.pow(2, aux);
             } else {
                 data [position] = (byte) sum;
                 position ++;
@@ -59,28 +59,28 @@ public class RandomNumberAndCheckPrime {
     */
     public BigInteger linearCongruential(int modulus, int multiplier, int increment, int seed, int size_key) {
         if (modulus <= 0)
-            return null ;
+            return null;
         if (!(0 < multiplier && multiplier < modulus))
-            return null ;
+            return null;
         if (!(0 <= increment && increment < modulus))
-            return null ;
+            return null;
         if (!(0 <= seed && seed < modulus))
-            return null ;
+            return null;
         if (size_key % 32 != 0)
-            return null ;
+            return null;
         int x = seed ;
-        int aux = Math.floorDiv (size_key , 32) ;
+        int aux = Math.floorDiv (size_key , 32);
         byte [] data = new byte [aux * 4];
         int position = 0;
         for (int i = 0; i < aux ; i ++) {
             x = (multiplier * x + increment) % modulus;
-            data[position] = (byte) ((i& 0x000000FF) >> 24) ;
-            data[position + 1] = (byte) ((i & 0x0000FF ) >> 16) ;
-            data[position + 2] = (byte) ((i & 0x00FF) >> 8) ;
+            data[position] = (byte) ((i& 0x000000FF) >> 24);
+            data[position + 1] = (byte) ((i & 0x0000FF ) >> 16);
+            data[position + 2] = (byte) ((i & 0x00FF) >> 8);
             data[position + 3] = (byte) (i & 0xFF);
             position = position + 4;
         }
-        return new BigInteger ( data );
+        return new BigInteger (data);
     }
 
     /*
@@ -103,13 +103,13 @@ public class RandomNumberAndCheckPrime {
         BigInteger a;
         do {
             a = new BigInteger (number.bitLength (), rand);
-        } while (a.compareTo (BigInteger.valueOf (2)) == -1 || number . subtract (BigInteger.valueOf (1) ).compareTo(a) == -1);
-        if (a.modPow(q, number).equals(BigInteger.valueOf (1)))
+        } while (a.compareTo (BigInteger.valueOf(2)) == -1 || number.subtract(BigInteger.valueOf(1)).compareTo(a) == -1);
+        if (a.modPow(q, number).equals(BigInteger.valueOf(1)))
             return true;
-        BigInteger aux ;
+        BigInteger aux;
         BigInteger i = BigInteger.valueOf(0);
         while (i.compareTo(k) == -1) {
-            aux = BigInteger.valueOf(2).modPow(i, number).multiply(q) ;
+            aux = BigInteger.valueOf(2).modPow(i, number).multiply(q);
             if (a.modPow(aux, number).equals(number.subtract(BigInteger.valueOf(1))))
                 return true;
             i = i.add(BigInteger.valueOf(1));
@@ -153,17 +153,16 @@ public class RandomNumberAndCheckPrime {
         if (number.mod (BigInteger.valueOf(2)).equals(BigInteger.valueOf (0)) || number.equals(BigInteger.valueOf(0)) || number.equals(BigInteger.valueOf(1)))
             return false;
         Random rand = new Random ();
-        BigInteger a , result;
+        BigInteger a, result;
         for (int i = 0; i < number.bitLength(); i++) {
             do {
                 a = new BigInteger (number.bitLength(), rand);
             } while (a.compareTo(BigInteger.valueOf(2)) == -1 || number.subtract(BigInteger.valueOf(1)).compareTo(a) == -1);
             result = a.modPow(number.subtract(BigInteger.valueOf(1)), number);
-            if (!result.equals(BigInteger.valueOf(1))) {
+            if (!result.equals(BigInteger.valueOf(1)))
                 return false;
-            } else {
+            else
                 continue;
-            }
         }
         return true;
     }
