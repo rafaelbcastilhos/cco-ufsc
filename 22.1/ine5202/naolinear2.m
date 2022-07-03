@@ -20,10 +20,6 @@ function NaoLinear
   k
   x
   d
-
-
-
-
 end
 
 function y1=funcao1(x)
@@ -32,4 +28,3 @@ end
 function y2=funcao2(x)
   y2=x(1)^2+x(2)^2-4;
 end
-
