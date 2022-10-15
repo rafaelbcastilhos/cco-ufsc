@@ -1,17 +1,10 @@
 clear
 clc
-
-a =[1 1 1.5 1 1.5 0 0 0 0 0;
-    0 1 0.01 0.51 1.5 0.5 0 0 0 0;
-    2.9 1 2 1 1 0 5 0 0 0;
-    9 1 0.2 1 1 0 0 1.5 0 0;
-    1 0 2 0 0 1 1 1 0 2;
-    0 1 0 0 -2 0 1 -1 1 1;
-    1 0 2 0 0 0 1 1 1 0;
-    0 1 0 0 2 0 1 1 1 -1;
-    0 0 1 0 2 1 -1 0 -1 -1;
-    0 1 0 0 2 0 1 0 1 1];
-b = [4 -3 1 -1 -1 0 -1 1 3 -2];
+format long
+a =[-0.5 -1.50 -3;
+    -1 2 3;
+    2.5 -4 4.5];
+b = [5.75 -4.5 -58.25];
 ca=a;
 cb=b;
 n = length(b);
@@ -25,14 +18,14 @@ for k=1:n-1 %linha pivo e coef pivo
       maior=abs(a(i,k));
       p=i;%linha do maior em modulo
     end
-  end 
-  %trocando linhas 
-    if(p>k) 
+  end
+  %trocando linhas
+    if(p>k)
         for j=k:n
             aux=a(k,j);
             a(k,j)=a(p,j);
             a(p,j)=aux;
-        end 
+        end
     aux=b(k);
     b(k)=b(p);
     b(p)=aux;
