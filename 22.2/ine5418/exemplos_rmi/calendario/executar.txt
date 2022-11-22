@@ -1,0 +1,6 @@
+javac *.java
+rmiregistry &
+
+java -Djava.security.policy=server.policy Server
+
+java -Djava.security.policy=server.policy Client
