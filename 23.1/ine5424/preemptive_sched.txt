@@ -1,0 +1,10 @@
+riscv boota em machine mode
+descobrir qual core esta bootando primeiro
+apenas um core rv64gc, definir 0 ou 1
+
+//Thread(int (* entry)(Tn ...), Tn ... an);
+(*)() = ponteiro para funcao
+
+alguem foi pra fila ready, pergunta se nao é mais prioritario de quem esta na cpu
+
+gerenciador de filas

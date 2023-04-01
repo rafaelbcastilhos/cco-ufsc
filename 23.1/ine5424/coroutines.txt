@@ -1,0 +1,8 @@
+implementadas sob threads, mas nao sao
+posso interromper execucao passando para o contexto de outro fluxo
+architecture e machine
+pod = play on data (char long int nao gera codigo)
+
+diferencao escalonador preempetivo e nao:
+preempptivo somente sai da cpu por ato proprio
+nao preemptivo saida da cpu conforme necessidade

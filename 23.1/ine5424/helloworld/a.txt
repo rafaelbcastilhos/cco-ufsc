@@ -1,0 +1,28 @@
+segmento=grupo de codigo, dados e stack. é de responsabildiade do linkerscript
+secoes=sao agrupadas para formar segmento, geradas pelo compilador, agrupadas pelo link editor
+
+nome de secoes:
+.text = segmento de codigo
+.data = segmneto de dados
+.bss = segmento de dados nao inicializados
+
+size = tamanho da secao em bytes
+vma = endereco virtual, pode falar de disco
+lma = endereco logico
+algn=flag para alinhamento
+linkerscript=vai testar possibilidades de compilacao, memoria, linguagem, etc
+tabela de simbolos:
+local,global,dado/funcao
+bcopy,mcopy pode ser otimizada pelo compilador, converte bloco em assembly nativo
+ebp=registrador que salva o stackframe
+eax=return 0, registrador que leva o valor de retorno
+varias coisas acontecem antes de invocar a main, abrir stdin, stdout, stderr
+crt1 ou crt0: faz coisas independente do programa, limpa o .bss
+crti ou crto: coisas tipicas do ambiente, open stdin, out, err, malloc
+kill chama o processo para matar ele proprio
+return da main, retorna pra crtn que sera morto o processo
+kill chama o processo para matar ele proprio
+sigvec=vetores de sinais
+os parametros no kill, passam pela tabela sigvec, podendo programar para melhor logica para os parametros
+__________
+linha 16 nao gera codigo

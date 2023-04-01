@@ -1,0 +1,8 @@
+antes chamada yield que dormia
+agora vai dormir em uma fila de threads
+se excluir mutex/semaforo, deve ser acordado todos os que estao na fila
+assert = statis const cast para 0
+complexidade é devido a transição epson quando há interrupção, fazendo com que tenha transição epson entre todos os estados
+somente fazer lock quando houver recurso compartilhado
+quando um processo de baixa prioridade estiver na seçao critica, para nao preemptar, deve assumir a prioridade igual a do outro processo que está requisitando a seção crítica ou prioridade máxima, para continuar executando
+
