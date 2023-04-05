@@ -1,0 +1,169 @@
+TIPO 3: Regular: N->aA | a 
+--- AF --- Não tem relação de posição e quantidade
+Soma, par, impar, modulo
+
+TIPO 2: Livre de Contexto: N->(N U T)+ 
+--- AP --- Tem relação de posição e quantidade com 2 símbolos
+Igual ou diferente, maior ou menor, reverso
+Quando cruzar relação de símbolos, não é LC, e sim SC
+
+
+TIPO 1: Sensível ao contexto: (N U T)+ -> (N U T)+  (produção de troca)
+--- MT --- Tem relação de posição e quantidade com 3 ou mais símbolos
+
+4) S-> aA | bB
+A-> aA | bB
+B-> bC
+C-> b
+
+5) S-> aA | bB
+A-> aA | bB | a
+B-> aA
+
+6) S-> aBPA1 | bBIA0
+BPA1 -> aBPA2 | bBIA1
+BIA0 -> aBIA0 | bBPA0 | b
+BPA2 -> aS | bBIA2 | a
+BIA1 -> aBIA2 | bBPA1
+BPA0 -> aBPA1 | bBIA0
+BIA2-> aBIA0 | bBPA2
+
+8) S-> aAIBP | bAPBI | c
+AIBP -> aS | bAIBI | a
+APBI -> aAIBI | bS | b
+AIBI -> aAPBI | bAIBP
+
+9) S-> aAIBPCP | bAPBICP | cAPBPCI | c
+AIBPCP -> aS | bAIBICP | cAIBPCI | a
+APBICP -> aAIBICP | bS | cAPBICI | b
+APBPCI -> aAPBICI | bAIBPCI | cS
+AIBICP -> aAPBICP | bAIBPCP | cAIBICI
+AIBPCI -> aAPBPCI | bAIBICI | cAIBPCP
+APBICI -> aAIBICI | bAPBPCI | cAPBICP
+
+10) S-> aA
+(c par) A-> aA | bA | cB | b
+(c impar) B-> aB | bB | cA
+
+14) S-> 0I | 0P | 1I | 1P | 0
+I-> OI | OP | 1I | 1P | 0
+P-> 0P | 0I | 1I | 1P | 0
+
+17) S-> aA1 | bB1 | &
+A1-> aA2 | bB2
+A2-> aA3 | a | b | bB3
+A3-> aA1 | bB1
+B1-> bB2
+B2-> bB3 | b
+B3-> bB1
+
+18) ta errado
+S-> aM1P | bM0I | cM1P
+M1P-> aM2P | bM1I | cM2P
+M0I-> aM1I | bM0P | cM1P
+M2P-> aM0P | bM2I | cM0P
+M1I-> aM2I | bM1P | cM2I
+M0P-> aM1P | bM0I | cM1P
+M2I-> aM0I | bM0P | cM1P
+
+22) a^n b^m c^k | a >= 0, b >= 1, c >= 2
+S->A | B
+A->aAbcc | bB | bCc
+B->bBCc|bcc|bCc|b
+C->c
+
+23) S-> ab | bc | AC | A | C | &
+A-> aAb | ab
+B-> bCc | bc
+
+24)
+S → aB | bS | cS | &
+B → aS | bB | cB
+
+
+25) a^n b^m c^k | n >= m >= k | A >= B >= C
+S' -> S | &
+S -> AB | AC | BC
+A -> aA | a
+B -> bBc | bc
+C -> cC | c
+
+26) S-> A(i=j) | B(j=k) | C | D | AC | DB
+A-> aAb | ab
+B-> bBc | bc
+C-> cC | c
+D-> aD | a
+
+29) ww | {a, b}*
+S'->S|&
+S->aSA|bSB|HA|BP
+H->a
+P->b
+HA->Ha
+HB->Hb
+PA->Pa
+PB->Pb
+aA->Aa
+aB->Ba
+bA->Ab
+bB->Bb
+
+30) S-> A | &
+A-> aAd | ad | B
+B-> bBc | bc
+
+31) S -> A | B
+A -> aAa | aBb | a
+B -> bBb | bAa | b
+
+a^m b^n c^p d^q | m+n >= p+q
+S->A|B|C|D|E|F|&
+A->aAd|B|C|D|ad|E|F
+B->aBc|D|ac|E|F
+C->bCd|D|bd|F
+D->bDc|bc|F
+E->aE|a|F
+F->bF|b
+
+A->aAd->aEd_>aaEd->aaFd->aabFd->aabbd
+B->E->aE->aaE->aaF->aab
+B->aBc->aacc
+C->bCd->bbCdd->bbDdd->bbbDcdd->bbbFcdd->bbbbFcdd->bbbbbcdd
+
+
+V2
+1)
+(A0B0) S->aM | bN | cO | c
+(A1B0) M->a | aO | bP | cM
+(A0B1)N->aP | b | bO | cN
+(A1B1)->aM | bN | c | cO
+()P-> aN | bM | cP
+
+2)S->a<mod3>|b<mod3>|cS|c
+<mod3>->a<mod2>|b<mod2>|c<mod3>
+<mod2>->a<mod1>|b<mod1>|<mod2>
+<mod1>->a<mod0>|b<mod0>|c<mod1>
+<mod0>->a|b|aS|bS|c<mod0>
+
+a^i b^j c^j d^i:
+S-> A | B
+A-> aBd | aAd | ad
+B-> bBc | bc
+
+a^i b^j c^k e k=i+j
+S->A
+A->aAc|ac|bc|B
+B->bc|bBc
+
+a^i b^j c^j e i < j <= k
+S → aSBC | D
+D → bDC | bc | E
+E → cE | c
+CB → BC
+cB → Bc
+Cb → bC
+cb → bc
+bB → bb
+bC → bc
+cC → cc
+aSBC->aDBC->abDCBC->abECBC->abcECBC->abccCBC->abcccBC->abccBcC->abcBccC->abBcccC->abbcccC->abbcccc
