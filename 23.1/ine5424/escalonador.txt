@@ -1,0 +1,7 @@
+multiplas filas, uma prioritaria e outra secundaria para round robin
+
+scheduler: suspend() and resume() are key for hardware implementations
+suspend nao retira por completo
+remove vai retirar por completo
+
+reinterpretcast = pega parcela da memoria e reinterpreta, nao ha conversao
