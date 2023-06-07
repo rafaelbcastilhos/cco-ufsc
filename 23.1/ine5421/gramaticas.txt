@@ -51,11 +51,9 @@ P-> 0P | 0I | 1I | 1P | 0
 
 17) S-> aA1 | bB1 | &
 A1-> aA2 | bB2
-A2-> aA3 | a | b | bB3
-A3-> aA1 | bB1
+A2-> aS | a | b | bs
 B1-> bB2
-B2-> bB3 | b
-B3-> bB1
+B2-> bS | b
 
 18) ta errado
 S-> aM1P | bM0I | cM1P
@@ -65,6 +63,19 @@ M2P-> aM0P | bM2I | cM0P
 M1I-> aM2I | bM1P | cM2I
 M0P-> aM1P | bM0I | cM1P
 M2I-> aM0I | bM0P | cM1P
+
+ta certo
+S->M0BP|M0BI
+M0BP->aM1BP | bM0BI | cM1BPC
+M0BI->bM0BP | b | cM1BIC
+M1BP->aM2BP|bM2BI|cM2BPC
+M1BPC->cM2BPC
+M2BP->aS|bM2BI|cM0BPC
+M2BI->bM2BP|cM0BPC
+M2BPC->cM0BPC | c
+M0BPC->cM1BPC
+
+M0BP->aM1BP->aaM2BP->aabM2BI->aabbM2BP->aabbcM0BPC->aabbccM1BPC->aabbcccM2BPC->aabbcccc
 
 22) a^n b^m c^k | a >= 0, b >= 1, c >= 2
 S->A | B
@@ -93,6 +104,18 @@ A-> aAb | ab
 B-> bBc | bc
 C-> cC | c
 D-> aD | a
+
+27)ww^r
+S'->S | &
+S->aSa | bSb | aa | bb
+
+28) wcw | w {a, b}
+S-> aSA | bSB | c
+cA-> ca
+aA-> Aa
+bA-> Ab
+aB-> Ba
+bB-> Bb
 
 29) ww | {a, b}*
 S'->S|&
@@ -167,3 +190,57 @@ bB → bb
 bC → bc
 cC → cc
 aSBC->aDBC->abDCBC->abECBC->abcECBC->abccCBC->abcccBC->abccBcC->abcBccC->abBcccC->abbcccC->abbcccc
+
+OA->01B->010C->0101C->01010B->010101
+1b->11
+1b->11d->111b->1111
+
+aSBC->aaACBC->aaDCBC->aaaDCBC->aaaaCBC->aaaaBCC->aaaabCC->aaaabcC->aaaabcc
+
+0=0
+1=1
+10=2
+11=3
+100=4
+101=5
+110=6
+111=7
+1000=8
+1001=9
+1010=10
+1011=11
+1100=12
+1101=13
+1110=14
+1111=15
+10000=16
+10001=17
+10010=18
+10011=19
+10100=20
+10101=21
+
+aA->aaB->aacE->aaccC->aacccD->aacccc
+
+aSd->aAd->aaAd->aaad
+A->aA->aaA->aaa
+AB->aAB->aaaB->aaabBc->aaabbcc
+aSd->aABd->aaABd->aaaBd->aaabcd
+
+S' → bS'' | aA | cC | &
+0 S → bS'' | aA | cC
+0 S'' → bS | aA' | cC | b
+1 A → bA' | aB | cD
+1 A' → bA | aB' | b
+2 B → bB' | aS | a | cE | c
+2 B' → bB | aS'
+1 C → cD
+2 D → cE | c
+0 E → cC
+
+bS'' -> bbS->bbbS''->bbbb
+aA->abA'->abbA->abbcD->abbcc
+aA->aaB->aaaS->aaaS''->aaabS''->aaabbS->aaabbbS''->aaabbbS->aaabbbcC->aaabbbccD->aaabbbccc
+
+a^n b^n c^n
+aABC->aaBCBC->aabCBC->aabBCC->aabbCC->aabbcC->aabbcc
