@@ -1,0 +1,14 @@
+MULTIPLICAÇÃO MATRIZ QUADRADA:
+
+float matriz_a[2][2];
+
+def multiplica(float matriz_a){
+	float matriz_b[2][2];
+	for(i = 0; i < 2; i = i + 1)
+		for(j = 0; j < 2; j = j + 1)
+			matriz_b[i][j] = matriz_a[i][j] * matriz_a[j][i];
+
+	print matriz_b;
+	return;
+}
+

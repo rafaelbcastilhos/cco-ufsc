@@ -1,0 +1,18 @@
+SEQUENCIA DE DERIVAÇÕES:
+
+PROGRAM -> FUNCLIST -> FUNCDEF -> def ident(PARAMLIST){STATELIST}
+	PARAMLIST -> float ident
+	STATELIST -> STATELIST
+		STATEMENT -> VARDECL -> float ident[2][2];
+		STATEMENT -> FORSTAT -> for(ATRIBSTAT; EXPRESSION; ATRIBSTAT) STATEMENT
+			ATRIBSTAT -> LVALUE = EXPRESSION -> ident = NUMEXPRESSION -> ident = TERM -> ident = UNARYEXPR -> ident = int_constant;
+			EXPRESSION -> NUMEXPRESSION < NUMEXPRESSION -> UNARYEXPR < NUMEXPRESSION -> UNARYEXPR < UNARYEXPR -> FACTOR < UNARYEXPR -> LVALUE < UNARYEXPR -> ident < FACTOR -> ident < int_constant
+			ATRIBSTAT -> LVALUE = EXPRESSION -> ident = EXPRESSION -> ident = NUMEXPRESSION -> ident = TERM + TERM -> ident = TERM + UNARYEXPR -> ident = UNARYEXPR + UNARYEXPR -> ident = FACTOR + FACTOR -> ident = int_constant + FACTOR -> ident = int_constant + int_constant;
+
+		IGUAL PARA O SEGUNDO FOR...
+
+			STATEMENT -> ATRIBSTAT -> LVALUE = EXPRESSION -> LVALUE = NUMEXPRESSION -> LVALUE = TERM -> LVALUE = UNARYEXPR * UNARYEXPR -> LVALUE = ident = UNARYEXPR * UNARYEXPR -> ident = FACTOR * FACTOR -> ident = float_constant * float_constant;
+	
+	STATEMENT -> PRINTSTAT; -> print EXPRESSION -> print NUMEXPRESSION -> print TERM -> print UNARYEXPR -> print FACTOR -> print float_constant;
+	STATEMENT -> RETURNSTAT; -> return;
+
