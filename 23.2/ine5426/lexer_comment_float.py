@@ -16,7 +16,7 @@ class Lexer:
 #    Comece a acumular caracteres até nova linha
 #    Emita token COMENTARIO
 #    Retorne ao estado inicial
-        if current_char == '#':  
+        if current_char == '#':  # Verifica se atende o primeiro estado do diagrama COMENTARIO
             comment = current_char
             self.position += 1
 
