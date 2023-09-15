@@ -12,9 +12,10 @@ function xdot = veiculoODE(x, t)
   k2 = 0.1;
   global inputs;
   # ODEs
-  xdot(1) = k1*inputs(1) * k2*sin(x(3));
-  xdot(2) = k1*inputs(1) * k2*cos(x(3));
-  xdot(3) = k2*inputs(2);
+  xdot(1) = x(4) * cos(x(3)); % Derivada da posição x
+  xdot(2) = x(4) * sin(x(3)); % Derivada da posição y
+  xdot(3) = k2 * inputs(2); % Derivada do ângulo de direção
+  xdot(4) = k1 * inputs(1); % Derivada da velocidade
 endfunction
 
 function [timeNextEvent, nextEvent] = motorista(t)
